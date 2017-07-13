@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RESTClient {
 
-    private static final String BASE_URL = "http://samples.openweathermap.org";
+    private static final String BASE_URL = "http://api.openweathermap.org/";
     private Retrofit retrofit;
     private final OkHttpClient client;
 

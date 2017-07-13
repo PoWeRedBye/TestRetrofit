@@ -4,11 +4,15 @@ package com.example.maxim_ozarovskiy.testretrofitrestapp;
  * Created by Maxim_Ozarovskiy on 13.07.2017.
  */
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Example {
+public class Example implements Parcelable {
 
     @SerializedName("coord")
     @Expose
@@ -143,4 +147,55 @@ public class Example {
         this.cod = cod;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.coord, flags);
+        dest.writeList(this.weather);
+        dest.writeString(this.base);
+        dest.writeParcelable(this.main, flags);
+        dest.writeValue(this.visibility);
+        dest.writeParcelable(this.wind, flags);
+        dest.writeParcelable(this.clouds, flags);
+        dest.writeValue(this.dt);
+        dest.writeParcelable(this.sys, flags);
+        dest.writeValue(this.id);
+        dest.writeString(this.name);
+        dest.writeValue(this.cod);
+    }
+
+    public Example() {
+    }
+
+    protected Example(Parcel in) {
+        this.coord = in.readParcelable(Coord.class.getClassLoader());
+        this.weather = new ArrayList<Weather>();
+        in.readList(this.weather, Weather.class.getClassLoader());
+        this.base = in.readString();
+        this.main = in.readParcelable(Main.class.getClassLoader());
+        this.visibility = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.wind = in.readParcelable(Wind.class.getClassLoader());
+        this.clouds = in.readParcelable(Clouds.class.getClassLoader());
+        this.dt = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.sys = in.readParcelable(Sys.class.getClassLoader());
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.name = in.readString();
+        this.cod = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Example> CREATOR = new Parcelable.Creator<Example>() {
+        @Override
+        public Example createFromParcel(Parcel source) {
+            return new Example(source);
+        }
+
+        @Override
+        public Example[] newArray(int size) {
+            return new Example[size];
+        }
+    };
 }

@@ -1,6 +1,5 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp;
 
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -11,7 +10,7 @@ import retrofit2.http.Query;
  */
 
 public interface WeatherService {
-    @GET("/data/2.5/weather")
+    @GET("data/2.5/weather")
     Call<Example> getWeatherExample(@Query("q") String q,
                                     @Query("appid") String appid);
 }
