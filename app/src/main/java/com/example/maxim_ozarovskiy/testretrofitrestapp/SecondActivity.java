@@ -70,10 +70,12 @@ public class SecondActivity extends AppCompatActivity {
         wind_speed = example.getWind().getSpeed();
         wind_deg = example.getWind().getDeg();
 
+        //перевод из фаренгейтов в цельсий
         tempCels = (temperature - 32)/1.8;
         tempMaxCels = (tempMax - 32)/1.8;
         tempMinCels = (tempMin - 32)/1.8;
 
+        //double не хочет заносить в текст вью, по этому делаю перевод в стрингу...
         String tempCelsiy = String.valueOf(tempCels);
         String tempMaxCelsiy = String.valueOf(tempMaxCels);
         String tempMinCelsiy = String.valueOf(tempMinCels);

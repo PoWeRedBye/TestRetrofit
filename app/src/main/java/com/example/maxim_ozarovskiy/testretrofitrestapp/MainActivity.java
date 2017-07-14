@@ -38,22 +38,27 @@ public class MainActivity extends AppCompatActivity {
         String city_name = intent.getStringExtra("cityName");
         cityName.setText(city_name);
 
+        //тут две проблемы, с EditText я не могу взять данные т.к. инициализирует пустое поле до того как я что-то туда введу...
+        // путь выходит такой: http://api.openweathermap.org/data/2.5/weather?q=&appid=2fa8c9a46e8ac6ad4bcc4f4fc48e5865
+        //т.е. q = null;
 
+        //вторая то что в модель ничего не записывается я пробовал делать модель локальной и анонимной, суть не меняется....
 
 
         check.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                RESTClient.getInstance().getWeatherExample().getWeatherExample(q,appid).enqueue(new Callback<Example>() {
+                RESTClient.getInstance().getWeatherExample().getWeatherExample(q, appid).enqueue(new Callback<Example>() {
                     @Override
                     public void onResponse(Call<Example> call, Response<Example> response) {
                         ex = response.body();
                         Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
-                        intent.putExtra("Example",ex);
+                        intent.putExtra("Example", ex);
                         startActivity(intent);
 
                     }
+
                     @Override
                     public void onFailure(Call<Example> call, Throwable t) {
                     }
@@ -65,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void startTwoActivity(){
+    public void startTwoActivity() {
         Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
-        intent.putExtra("Example",ex);
+        intent.putExtra("Example", ex);
         startActivity(intent);
     }
 
