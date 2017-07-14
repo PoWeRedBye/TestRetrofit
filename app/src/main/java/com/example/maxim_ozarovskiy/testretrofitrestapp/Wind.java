@@ -14,24 +14,24 @@ public class Wind implements Parcelable {
 
     @SerializedName("speed")
     @Expose
-    private Double speed;
+    private String speed;
     @SerializedName("deg")
     @Expose
-    private Integer deg;
+    private String deg;
 
-    public Double getSpeed() {
+    public String getSpeed() {
         return speed;
     }
 
-    public void setSpeed(Double speed) {
+    public void setSpeed(String speed) {
         this.speed = speed;
     }
 
-    public Integer getDeg() {
+    public String getDeg() {
         return deg;
     }
 
-    public void setDeg(Integer deg) {
+    public void setDeg(String deg) {
         this.deg = deg;
     }
 
@@ -42,16 +42,16 @@ public class Wind implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.speed);
-        dest.writeValue(this.deg);
+        dest.writeString(this.speed);
+        dest.writeString(this.deg);
     }
 
     public Wind() {
     }
 
     protected Wind(Parcel in) {
-        this.speed = (Double) in.readValue(Double.class.getClassLoader());
-        this.deg = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.speed = in.readString();
+        this.deg = in.readString();
     }
 
     public static final Parcelable.Creator<Wind> CREATOR = new Parcelable.Creator<Wind>() {

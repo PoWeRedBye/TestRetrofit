@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Test Retrofit Rest App</string>
+    <string name="sorry_bad_city">Sorry man! Please enter a correct city name</string>
+    <string name="no_inet">No inet</string>
 </resources>
