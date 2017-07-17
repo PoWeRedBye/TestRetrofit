@@ -8,7 +8,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,15 +19,16 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String q = "Kharkov";
+    private String q;
     private String appid = "2fa8c9a46e8ac6ad4bcc4f4fc48e5865";
+    private String cnt = "7";
 
-    private String city_name;
-    Example ex;
+
+    Example example;
 
     EditText cityName;
-    Button check;
-
+    ImageView image;
+    Button sixteenDayWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,62 +36,68 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.city_check);
         initUI();
         initListeners();
-
-//        Intent intent = getIntent();
-//        String city_name = intent.getStringExtra("cityName");
-//        cityName.setText(city_name);
-        //тут две проблемы, с EditText я не могу взять данные т.к. инициализирует пустое поле до того как я что-то туда введу...
-        // путь выходит такой: http://api.openweathermap.org/data/2.5/weather?q=&appid=2fa8c9a46e8ac6ad4bcc4f4fc48e5865
-        //т.е. q = null;
-
-        //вторая то что в модель ничего не записывается я пробовал делать модель локальной и анонимной, суть не меняется....
     }
 
     private void initListeners() {
-        check.setOnClickListener(new View.OnClickListener() {
+        sixteenDayWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getCityName();
-                getWeather();
+                if(isValidCity()){
+                    getSixteenDayWeather();
+                }
             }
         });
     }
 
     private void initUI() {
         cityName = (EditText) findViewById(R.id.CityCheckName);
-        check = (Button) findViewById(R.id.CheckButton);
+        sixteenDayWeather = (Button) findViewById(R.id.SixTeenDayCheckButton);
     }
 
-    private void getCityName() {
+    private boolean getCityName() {
         String s = cityName.getText().toString();
-        if (!TextUtils.isEmpty(s)) {
+        if (TextUtils.isEmpty(s)) {
+            Toast.makeText(getApplicationContext(), "Please enter the City Name!!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
             q = s;
+            return true;
         }
     }
 
-    private void getWeather() {
-        RESTClient.getInstance().getWeatherExample().getWeatherExample(q, appid).enqueue(new Callback<Example>() {
+    private boolean isValidCity() {
+        if (getCityName()) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
+    public void startThirdActivity() {
+        Intent intent = new Intent(getApplicationContext(), ComboActivity.class);
+        intent.putExtra(ComboActivity.sixteenDayBundleExample, example);
+        startActivity(intent);
+    }
+
+    private void getSixteenDayWeather(){
+        RESTClient.getInstance().getSixteenDayWeatherExample().getWeatherExample(q, appid, cnt).enqueue(new Callback<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example>() {
+
+
             @Override
-            public void onResponse(@NonNull Call<Example> call, @NonNull Response<Example> response) {
-                if (response.isSuccessful()) {
-                    ex = response.body();
-                    startTwoActivity();
+            public void onResponse(@NonNull Call<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example> call, @NonNull Response<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example> response) {
+                if (response.isSuccessful()){
+                    example = response.body();
+                    startThirdActivity();
                 } else {
                     Toast.makeText(MainActivity.this, R.string.sorry_bad_city, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<Example> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example> call, @NonNull Throwable t) {
                 Toast.makeText(MainActivity.this, R.string.no_inet, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public void startTwoActivity() {
-        Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
-        intent.putExtra(SecondActivity.bundleExample, ex);
-        startActivity(intent);
-    }
-
+}
 }
