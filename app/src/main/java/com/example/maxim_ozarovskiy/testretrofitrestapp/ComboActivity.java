@@ -1,5 +1,6 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,7 @@ import java.util.List;
  * Created by Maxim_Ozarovskiy on 16.07.2017.
  */
 
-public class ComboActivity extends AppCompatActivity {
+public class ComboActivity extends AppCompatActivity implements MyAdapter.ItemClickListener<ListModel> {
 
     TextView cityName;
     TextView currentTemp;
@@ -72,7 +73,7 @@ public class ComboActivity extends AppCompatActivity {
         calcData();
         setData();
         list = example.getList();
-        myAdapter = new MyAdapter(this, list.subList(1, 7));
+        myAdapter = new MyAdapter(this, list.subList(1, 7),this);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(myAdapter);
@@ -87,6 +88,7 @@ public class ComboActivity extends AppCompatActivity {
         int minimalTemp = (int) tempMinCels;
 
         cityName.setText(city_name);
+        countryCode.setText(country_code);
         currentTemp.setText(String.valueOf(currTemp) + " °C");
         minTemp.setText(String.valueOf(minimalTemp)+" °C");
         maxTemp.setText(String.valueOf(maximalTemp)+" °C");
@@ -201,4 +203,10 @@ public class ComboActivity extends AppCompatActivity {
         return weather_image;
     }
 
+    @Override
+    public void ItemClick(ListModel v, int position) {
+        Intent intent = new Intent(getApplicationContext(), Details.class);
+        intent.putExtra("ListModel", v);
+        startActivity(intent);
+    }
 }

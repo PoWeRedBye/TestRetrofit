@@ -12,8 +12,7 @@ import android.widget.TextView;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.ListModel;
 import com.squareup.picasso.Picasso;
 
-
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private int weather_image;
     private Context context;
     private List<ListModel> list;
+    private ItemClickListener<ListModel> itemListener;
 
     private long date;
 
@@ -38,9 +38,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private int dayCels;
     private int nightCels;
 
-    public MyAdapter(Context context, List<ListModel> list) {
+    public MyAdapter(Context context, List<ListModel> list, ItemClickListener<ListModel> itemListener) {
         this.context = context;
         this.list = list;
+        this.itemListener = itemListener;
 
     }
 
@@ -53,10 +54,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(MyAdapter.ViewHolder holder, final int position) {
 
         date = list.get(position).getDt();
-        Date dateTime = new Date(date);
+        Date time = new Date();
+        time.setTime(date*1000);
+        SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy");
+        String formattedDate = format.format(time);
 
 
         dayKelvin = list.get(position).getTemp().getDay();
@@ -67,12 +71,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         tempNightCels = nightKelvin - 273;
         nightCels =(int) tempNightCels;
 
-        holder.data_card.setText(String.valueOf(dateTime));
+        holder.data_card.setText(formattedDate);
         holder.temp_night_card.setText(String.valueOf(nightCels)+ " °C");
         holder.temp_day_card.setText(String.valueOf(dayCels)+ " °C");
         weatherImage = list.get(position).getWeather().get(0).getIcon();
         weather_image = getIcon();
         Picasso.with(context).load(weather_image).into(holder.w_status_card);
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.ItemClick(list.get(position), position);
+            }
+        });
 
 
     }
@@ -152,5 +163,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 return R.drawable.fog_night;
         }
         return weather_image;
+    }
+    public interface ItemClickListener<T> {
+        void ItemClick(T v, int position);
     }
 }

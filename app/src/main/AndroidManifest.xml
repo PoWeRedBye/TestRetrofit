@@ -22,6 +22,9 @@
         <activity android:name=".ComboActivity">
 
         </activity>
+        <activity android:name=".Details">
+
+        </activity>
     </application>
 
 </manifest>
