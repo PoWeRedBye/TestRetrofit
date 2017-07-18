@@ -6,8 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Weather implements Parcelable
-{
+public class Weather implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -40,8 +39,7 @@ public class Weather implements Parcelable
             return (new Weather[size]);
         }
 
-    }
-            ;
+    };
 
     public Integer getId() {
         return id;

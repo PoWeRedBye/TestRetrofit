@@ -6,8 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class City implements Parcelable
-{
+public class City implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -44,8 +43,8 @@ public class City implements Parcelable
             return (new City[size]);
         }
 
-    }
-            ;
+    };
+
 
     public Integer getId() {
         return id;

@@ -6,8 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Temp implements Parcelable
-{
+public class Temp implements Parcelable {
 
     @SerializedName("day")
     @Expose
@@ -48,8 +47,7 @@ public class Temp implements Parcelable
             return (new Temp[size]);
         }
 
-    }
-            ;
+    };
 
     public Double getDay() {
         return day;

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example;
@@ -59,22 +60,23 @@ public class ComboActivity extends AppCompatActivity {
     private List<ListModel> list;
     private Example example;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ConstraintLayout constraintLayout;
+    private RelativeLayout relativeLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.combo_activity);
+        setContentView(R.layout.combo_activity_1);
 
         initUI();
         getData();
         calcData();
         setData();
         list = example.getList();
-        myAdapter = new MyAdapter(this, list.subList(1, 6));
+        myAdapter = new MyAdapter(this, list.subList(1, 7));
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(myAdapter);
+        myAdapter.notifyDataSetChanged();
 
     }
 
@@ -85,12 +87,12 @@ public class ComboActivity extends AppCompatActivity {
         int minimalTemp = (int) tempMinCels;
 
         cityName.setText(city_name);
-        currentTemp.setText(String.valueOf(currTemp));
-        minTemp.setText(String.valueOf(minimalTemp));
-        maxTemp.setText(String.valueOf(maximalTemp));
+        currentTemp.setText(String.valueOf(currTemp) + " °C");
+        minTemp.setText(String.valueOf(minimalTemp)+" °C");
+        maxTemp.setText(String.valueOf(maximalTemp)+" °C");
         humidity.setText(String.valueOf(humid));
-        pressure.setText(String.valueOf(press));
-        windSpeed.setText(String.valueOf(wind_speed));
+        pressure.setText(String.valueOf(press)+" hPa");
+        windSpeed.setText(String.valueOf(wind_speed)+" m/s");
         getDirection();
         windDegree.setText(direction);
         weather_image = getIcon();
@@ -98,20 +100,20 @@ public class ComboActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        cityName = (TextView) findViewById(R.id.city_name_combo);
-        currentTemp = (TextView) findViewById(R.id.current_temp_combo);
-        minTemp = (TextView) findViewById(R.id.temp_min_text_combo);
-        maxTemp = (TextView) findViewById(R.id.temp_max_text_combo);
-        humidity = (TextView) findViewById(R.id.humidity_text_combo);
-        pressure = (TextView) findViewById(R.id.pressure_text_combo);
-        windSpeed = (TextView) findViewById(R.id.wind_speed_text_combo);
-        windDegree = (TextView) findViewById(R.id.wind_degree_text_combo);
-        countryCode = (TextView) findViewById(R.id.country_code_combo);
+        cityName = (TextView) findViewById(R.id.city_name_combo_1);
+        currentTemp = (TextView) findViewById(R.id.current_temp_combo_1);
+        minTemp = (TextView) findViewById(R.id.temp_min_text_combo_1);
+        maxTemp = (TextView) findViewById(R.id.temp_max_text_combo_1);
+        humidity = (TextView) findViewById(R.id.humidity_text_combo_1);
+        pressure = (TextView) findViewById(R.id.pressure_text_combo_1);
+        windSpeed = (TextView) findViewById(R.id.wind_speed_text_combo_1);
+        windDegree = (TextView) findViewById(R.id.wind_degree_text_combo_1);
+        countryCode = (TextView) findViewById(R.id.country_code_combo_1);
 
-        weather_status_icon = (ImageView) findViewById(R.id.weather_status_combo);
+        weather_status_icon = (ImageView) findViewById(R.id.weather_status_combo_1);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        constraintLayout = (ConstraintLayout) findViewById(R.id.constraint_layout);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_combo);
+        relativeLayout = (RelativeLayout) findViewById(R.id.relative_combo);
     }
 
     private void getData() {

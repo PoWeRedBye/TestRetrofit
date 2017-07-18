@@ -6,8 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Coord implements Parcelable
-{
+public class Coord implements Parcelable {
 
     @SerializedName("lon")
     @Expose
@@ -32,8 +31,7 @@ public class Coord implements Parcelable
             return (new Coord[size]);
         }
 
-    }
-            ;
+    };
 
     public Double getLon() {
         return lon;

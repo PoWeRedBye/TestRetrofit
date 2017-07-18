@@ -12,20 +12,33 @@ import android.widget.TextView;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.ListModel;
 import com.squareup.picasso.Picasso;
 
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Maxim_Ozarovskiy on 16.07.2017.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private String weatherImage;
     private int weather_image;
     private Context context;
     private List<ListModel> list;
 
-    public MyAdapter(Context context, List<ListModel> list){
+    private long date;
+
+    private double tempDayCels;
+    private double tempNightCels;
+    private Double dayKelvin;
+    private Double nightKelvin;
+    private int dayCels;
+    private int nightCels;
+
+    public MyAdapter(Context context, List<ListModel> list) {
         this.context = context;
         this.list = list;
 
@@ -33,7 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_1, null);
 
         ViewHolder holder = new ViewHolder(v);
         return holder;
@@ -42,23 +55,34 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
 
-        holder.data_card.setText(list.get(position).getDt().toString());
-        holder.temp_night_card.setText(list.get(position).getTemp().getNight().toString());
-        holder.temp_day_card.setText(list.get(position).getTemp().getDay().toString());
-        weatherImage = list.get(position).getWeather().get(position).getIcon();
+        date = list.get(position).getDt();
+        Date dateTime = new Date(date);
+
+
+        dayKelvin = list.get(position).getTemp().getDay();
+        tempDayCels = dayKelvin - 273;
+        dayCels = (int) tempDayCels;
+
+        nightKelvin = list.get(position).getTemp().getNight();
+        tempNightCels = nightKelvin - 273;
+        nightCels =(int) tempNightCels;
+
+        holder.data_card.setText(String.valueOf(dateTime));
+        holder.temp_night_card.setText(String.valueOf(nightCels)+ " °C");
+        holder.temp_day_card.setText(String.valueOf(dayCels)+ " °C");
+        weatherImage = list.get(position).getWeather().get(0).getIcon();
         weather_image = getIcon();
         Picasso.with(context).load(weather_image).into(holder.w_status_card);
-
 
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
         ImageView w_status_card;
@@ -70,14 +94,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         public ViewHolder(View v) {
             super(v);
 
-            cardView = (CardView) v.findViewById(R.id.card);
-            w_status_card = (ImageView) v.findViewById(R.id.weather_status_card);
-            temp_day_card = (TextView) v.findViewById(R.id.text_temp_day_card);
-            temp_night_card = (TextView) v.findViewById(R.id.text_temp_niht_card);
-            data_card = (TextView) v.findViewById(R.id.date_card);
+            cardView = (CardView) v.findViewById(R.id.card_1);
+            w_status_card = (ImageView) v.findViewById(R.id.weather_status_card_1);
+            temp_day_card = (TextView) v.findViewById(R.id.text_temp_day_card_1);
+            temp_night_card = (TextView) v.findViewById(R.id.text_temp_niht_card_1);
+            data_card = (TextView) v.findViewById(R.id.date_card_1);
+
 
         }
     }
+
+    private void getDate(){
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(date);
+
+
+    }
+
     public int getIcon() {
         switch (weatherImage) {
             case "01d":

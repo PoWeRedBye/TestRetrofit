@@ -24,7 +24,7 @@ public class Example implements Parcelable {
     private Integer cnt;
     @SerializedName("list")
     @Expose
-    private ArrayList<ListModel> list ;
+    private ArrayList<ListModel> list;
 
     public ArrayList<ListModel> getList() {
         return list;

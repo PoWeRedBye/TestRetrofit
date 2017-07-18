@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     EditText cityName;
     ImageView image;
     Button sixteenDayWeather;
-    private String defaultCity = "Kharkiv";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         sixteenDayWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isValidCity()){
+                if (isValidCity()) {
                     getSixteenDayWeather();
                 }
             }
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private void initUI() {
         cityName = (EditText) findViewById(R.id.CityCheckName);
         sixteenDayWeather = (Button) findViewById(R.id.SixTeenDayCheckButton);
-        cityName.setText(defaultCity);
+        cityName.setText("Харьков");
     }
 
     private boolean getCityName() {
@@ -70,25 +69,25 @@ public class MainActivity extends AppCompatActivity {
     private boolean isValidCity() {
         if (getCityName()) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
 
     public void startThirdActivity() {
-        Intent intent = new Intent(this, ComboActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ComboActivity.class);
         intent.putExtra(ComboActivity.sixteenDayBundleExample, example);
         startActivity(intent);
     }
 
-    private void getSixteenDayWeather(){
+    private void getSixteenDayWeather() {
         RESTClient.getInstance().getSixteenDayWeatherExample().getWeatherExample(q, appid, cnt).enqueue(new Callback<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example>() {
 
 
             @Override
             public void onResponse(@NonNull Call<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example> call, @NonNull Response<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     example = response.body();
                     startThirdActivity();
                 } else {
@@ -101,5 +100,5 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.no_inet, Toast.LENGTH_SHORT).show();
             }
         });
-}
+    }
 }
