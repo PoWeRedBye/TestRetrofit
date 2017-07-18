@@ -1,16 +1,15 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.ListModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -57,38 +56,39 @@ public class ComboActivity extends AppCompatActivity {
 
     private MyAdapter myAdapter;
     private RecyclerView recyclerView;
-    private List<com.example.maxim_ozarovskiy.testretrofitrestapp.model.List> list;
+    private List<ListModel> list;
     private Example example;
     private RecyclerView.LayoutManager mLayoutManager;
     private ConstraintLayout constraintLayout;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.combo_activity);
 
         initUI();
         getData();
         calcData();
         setData();
-        myAdapter = new MyAdapter(this,list.subList(1,6));
+        list = example.getList();
+        myAdapter = new MyAdapter(this, list.subList(1, 6));
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(myAdapter);
 
     }
 
-    private void setData(){
+    private void setData() {
 
         int currTemp = (int) tempCels;
         int maximalTemp = (int) tempMaxCels;
         int minimalTemp = (int) tempMinCels;
 
         cityName.setText(city_name);
-        currentTemp.setText(currTemp);
-        minTemp.setText(minimalTemp);
-        maxTemp.setText(maximalTemp);
-        humidity.setText(humid);
+        currentTemp.setText(String.valueOf(currTemp));
+        minTemp.setText(String.valueOf(minimalTemp));
+        maxTemp.setText(String.valueOf(maximalTemp));
+        humidity.setText(String.valueOf(humid));
         pressure.setText(String.valueOf(press));
         windSpeed.setText(String.valueOf(wind_speed));
         getDirection();
@@ -115,7 +115,9 @@ public class ComboActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        example = getIntent().getParcelableExtra(sixteenDayBundleExample);
+        if (getIntent() != null && getIntent().hasExtra(sixteenDayBundleExample)) {
+            example = getIntent().getParcelableExtra(sixteenDayBundleExample);
+        }
         city_name = example.getCity().getName();
         country_code = example.getCity().getCountry();
         curr_temp = example.getList().get(0).getTemp().getDay();

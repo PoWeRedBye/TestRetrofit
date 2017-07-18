@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     EditText cityName;
     ImageView image;
     Button sixteenDayWeather;
+    private String defaultCity = "Kharkiv";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private void initUI() {
         cityName = (EditText) findViewById(R.id.CityCheckName);
         sixteenDayWeather = (Button) findViewById(R.id.SixTeenDayCheckButton);
+        cityName.setText(defaultCity);
     }
 
     private boolean getCityName() {
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void startThirdActivity() {
-        Intent intent = new Intent(getApplicationContext(), ComboActivity.class);
+        Intent intent = new Intent(this, ComboActivity.class);
         intent.putExtra(ComboActivity.sixteenDayBundleExample, example);
         startActivity(intent);
     }

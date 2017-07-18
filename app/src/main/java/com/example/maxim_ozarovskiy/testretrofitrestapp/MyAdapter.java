@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.ListModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,9 +23,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private String weatherImage;
     private int weather_image;
     private Context context;
-    private List<com.example.maxim_ozarovskiy.testretrofitrestapp.model.List> list;
+    private List<ListModel> list;
 
-    public MyAdapter(Context context, List<com.example.maxim_ozarovskiy.testretrofitrestapp.model.List> list){
+    public MyAdapter(Context context, List<ListModel> list){
         this.context = context;
         this.list = list;
 

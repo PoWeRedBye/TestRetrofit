@@ -6,8 +6,10 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class List implements Parcelable
-{
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListModel implements Parcelable {
 
     @SerializedName("dt")
     @Expose
@@ -23,7 +25,7 @@ public class List implements Parcelable
     private Integer humidity;
     @SerializedName("weather")
     @Expose
-    private java.util.List<Weather> weather = null;
+    private ArrayList<Weather> weather;
     @SerializedName("speed")
     @Expose
     private Double speed;
@@ -39,33 +41,6 @@ public class List implements Parcelable
     @SerializedName("snow")
     @Expose
     private Double snow;
-    public final static Parcelable.Creator<List> CREATOR = new Creator<List>() {
-
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public List createFromParcel(Parcel in) {
-            List instance = new List();
-            instance.dt = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            instance.temp = ((Temp) in.readValue((Temp.class.getClassLoader())));
-            instance.pressure = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.humidity = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            in.readList(instance.weather, (com.example.maxim_ozarovskiy.testretrofitrestapp.model.Weather.class.getClassLoader()));
-            instance.speed = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.deg = (Double) in.readValue((Integer.class.getClassLoader()));
-            instance.clouds = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            instance.rain = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.snow = ((Double) in.readValue((Double.class.getClassLoader())));
-            return instance;
-        }
-
-        public List[] newArray(int size) {
-            return (new List[size]);
-        }
-
-    }
-            ;
 
     public Integer getDt() {
         return dt;
@@ -97,14 +72,6 @@ public class List implements Parcelable
 
     public void setHumidity(Integer humidity) {
         this.humidity = humidity;
-    }
-
-    public java.util.List<Weather> getWeather() {
-        return weather;
-    }
-
-    public void setWeather(java.util.List<Weather> weather) {
-        this.weather = weather;
     }
 
     public Double getSpeed() {
@@ -147,21 +114,58 @@ public class List implements Parcelable
         this.snow = snow;
     }
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(dt);
-        dest.writeValue(temp);
-        dest.writeValue(pressure);
-        dest.writeValue(humidity);
-        dest.writeList(weather);
-        dest.writeValue(speed);
-        dest.writeValue(deg);
-        dest.writeValue(clouds);
-        dest.writeValue(rain);
-        dest.writeValue(snow);
+    public ArrayList<Weather> getWeather() {
+        return weather;
     }
 
+    public void setWeather(ArrayList<Weather> weather) {
+        this.weather = weather;
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.dt);
+        dest.writeParcelable(this.temp, flags);
+        dest.writeValue(this.pressure);
+        dest.writeValue(this.humidity);
+        dest.writeTypedList(this.weather);
+        dest.writeValue(this.speed);
+        dest.writeValue(this.deg);
+        dest.writeValue(this.clouds);
+        dest.writeValue(this.rain);
+        dest.writeValue(this.snow);
+    }
+
+    public ListModel() {
+    }
+
+    protected ListModel(Parcel in) {
+        this.dt = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.temp = in.readParcelable(Temp.class.getClassLoader());
+        this.pressure = (Double) in.readValue(Double.class.getClassLoader());
+        this.humidity = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.weather = in.createTypedArrayList(Weather.CREATOR);
+        this.speed = (Double) in.readValue(Double.class.getClassLoader());
+        this.deg = (Double) in.readValue(Double.class.getClassLoader());
+        this.clouds = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.rain = (Double) in.readValue(Double.class.getClassLoader());
+        this.snow = (Double) in.readValue(Double.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<ListModel> CREATOR = new Parcelable.Creator<ListModel>() {
+        @Override
+        public ListModel createFromParcel(Parcel source) {
+            return new ListModel(source);
+        }
+
+        @Override
+        public ListModel[] newArray(int size) {
+            return new ListModel[size];
+        }
+    };
 }
