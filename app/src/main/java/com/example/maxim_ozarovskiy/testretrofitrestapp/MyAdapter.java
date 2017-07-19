@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.ListModel;
 import com.squareup.picasso.Picasso;
 
@@ -48,7 +49,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_1, null);
-
         ViewHolder holder = new ViewHolder(v);
         return holder;
     }
@@ -61,7 +61,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         time.setTime(date*1000);
         SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy");
         String formattedDate = format.format(time);
-
 
         dayKelvin = list.get(position).getTemp().getDay();
         tempDayCels = dayKelvin - 273;
@@ -84,8 +83,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 itemListener.ItemClick(list.get(position), position);
             }
         });
-
-
     }
 
     @Override
@@ -94,33 +91,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         CardView cardView;
         ImageView w_status_card;
         TextView temp_day_card;
         TextView temp_night_card;
         TextView data_card;
 
-
         public ViewHolder(View v) {
             super(v);
-
             cardView = (CardView) v.findViewById(R.id.card_1);
             w_status_card = (ImageView) v.findViewById(R.id.weather_status_card_1);
             temp_day_card = (TextView) v.findViewById(R.id.text_temp_day_card_1);
             temp_night_card = (TextView) v.findViewById(R.id.text_temp_niht_card_1);
             data_card = (TextView) v.findViewById(R.id.date_card_1);
-
-
         }
-    }
-
-    private void getDate(){
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(date);
-
-
     }
 
     public int getIcon() {
@@ -164,6 +148,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
         return weather_image;
     }
+
     public interface ItemClickListener<T> {
         void ItemClick(T v, int position);
     }

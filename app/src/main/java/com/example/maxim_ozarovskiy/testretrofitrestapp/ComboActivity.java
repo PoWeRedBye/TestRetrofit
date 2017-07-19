@@ -102,6 +102,7 @@ public class ComboActivity extends AppCompatActivity implements MyAdapter.ItemCl
     }
 
     private void initUI() {
+        setTitle("My Weather App");
         cityName = (TextView) findViewById(R.id.city_name_combo_1);
         currentTemp = (TextView) findViewById(R.id.current_temp_combo_1);
         minTemp = (TextView) findViewById(R.id.temp_min_text_combo_1);

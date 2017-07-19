@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example;
 
 import retrofit2.Call;
@@ -23,22 +24,27 @@ public class MainActivity extends AppCompatActivity {
     private String appid = "2fa8c9a46e8ac6ad4bcc4f4fc48e5865";
     private String cnt = "7";
 
+    private CityCheck cityCheck;
 
     Example example;
 
-    EditText cityName;
+    /*EditText cityName;
     ImageView image;
-    Button sixteenDayWeather;
+    Button sixteenDayWeather;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.city_check);
-        initUI();
-        initListeners();
+        isValidCity();
+        getSixteenDayWeather();
+        finish();
+
+        //setContentView(R.layout.city_check);
+        //initUI();
+        //initListeners();
     }
 
-    private void initListeners() {
+    /*private void initListeners() {
         sixteenDayWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,16 +53,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
+    }*/
 
-    private void initUI() {
+    /*private void initUI() {
         cityName = (EditText) findViewById(R.id.CityCheckName);
         sixteenDayWeather = (Button) findViewById(R.id.SixTeenDayCheckButton);
         cityName.setText("Харьков");
-    }
+    }*/
 
     private boolean getCityName() {
-        String s = cityName.getText().toString();
+        cityCheck = getIntent().getParcelableExtra("CityCheck");
+
+        String s = cityCheck.getCityCheckName();
         if (TextUtils.isEmpty(s)) {
             Toast.makeText(getApplicationContext(), "Please enter the City Name!!", Toast.LENGTH_SHORT).show();
             return false;
