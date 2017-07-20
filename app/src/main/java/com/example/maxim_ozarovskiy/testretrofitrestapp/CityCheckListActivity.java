@@ -1,10 +1,12 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp;
 
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +31,9 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     private FloatingActionButton addCity;
     private Toolbar toolbar;
     private CityCheck cityCheck;
-    private DialogFragment dialog;
+
+    private String idCity;
+    private String CityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +48,12 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
         cityCheckList = dbAdapter.getDataFromDB();
 
         cityCheckListAdapter = new CityCheckListAdapter(this, cityCheckList, this, this);
-        cityCheckListAdapter.notifyDataSetChanged();
 
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
         recyclerView.setAdapter(cityCheckListAdapter);
-
+        cityCheckListAdapter.notifyDataSetChanged();
 
         addCity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +68,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
         super.onDestroy();
         dbAdapter.close();
     }
+
     private void initUI(){
         setTitle("My Weather App");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -81,7 +85,28 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
 
     @Override
     public void DeleteCityClick(CityCheck v, int position) {
-        //я хз что тут писать=(((
+        final int id = Integer.parseInt(v.getId());
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Delete this city");
+        alertDialogBuilder.setMessage("Are you shure??");
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dbAdapter.delRec(id);
+                cityCheckListAdapter.notifyItemRemoved(id);
+                dialog.dismiss();
+            }
+        });
+        alertDialogBuilder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
 
     }
 }

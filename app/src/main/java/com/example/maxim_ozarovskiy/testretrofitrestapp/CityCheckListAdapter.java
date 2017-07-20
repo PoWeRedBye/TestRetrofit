@@ -91,5 +91,6 @@ public class CityCheckListAdapter extends RecyclerView.Adapter<CityCheckListAdap
 
     public interface DeleteCityClickListener<D> {
         void DeleteCityClick(D d, int position);
+
     }
 }
