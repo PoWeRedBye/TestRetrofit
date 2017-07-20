@@ -33,7 +33,12 @@
     </style>
 
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <item name="android:displayOptions">useLogo</item>
+    <item name="logo">@drawable/one_day</item>
+    <item name="android:fontFamily">cursive</item>
+    <item name="android:text">@string/app_name</item>
+    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:displayOptions">useLogo</item>

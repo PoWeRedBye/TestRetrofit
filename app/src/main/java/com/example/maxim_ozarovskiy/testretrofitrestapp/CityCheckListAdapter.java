@@ -6,9 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.daimajia.swipe.SimpleSwipeListener;
+import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
 
 import java.util.List;
@@ -17,7 +24,7 @@ import java.util.List;
  * Created by Maxim_Ozarovskiy on 19.07.2017.
  */
 
-public class CityCheckListAdapter extends RecyclerView.Adapter<CityCheckListAdapter.ViewHolder> {
+public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdapter.ViewHolder> {
 
     private Context context;
     private List<CityCheck> cityCheckList;
@@ -37,26 +44,38 @@ public class CityCheckListAdapter extends RecyclerView.Adapter<CityCheckListAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.city_item, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_test, parent, false);//.inflate(R.layout.city_item, null); standart item view
 
         ViewHolder holder = new ViewHolder(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+
+        holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+        holder.swipeLayout.addSwipeListener(new SimpleSwipeListener() {
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                //если раскоментить будет ошибка... хотя с Pulse работает...
+                //YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
+                YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
+            }
+        });
 
         holder.cityName.setText(cityCheckList.get(position).getCityCheckName());
-
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 deleteCityClickListener.DeleteCityClick(cityCheckList.get(position), position);
+                mItemManger.removeShownLayouts(holder.swipeLayout);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, cityCheckList.size());
             }
         });
 
-        holder.cityCheckCard.setOnClickListener(new View.OnClickListener() {
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 itemCityClickListener.ItemClick(cityCheckList.get(position), position);
@@ -69,19 +88,27 @@ public class CityCheckListAdapter extends RecyclerView.Adapter<CityCheckListAdap
         return cityCheckList.size();
     }
 
+    @Override
+    public int getSwipeLayoutResourceId(int position) {
+        return R.id.swipe;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        CardView cityCheckCard;
+        //CardView cityCheckCard;
         TextView cityName;
-        ImageButton delete;
-
+        Button delete;
+        SwipeLayout swipeLayout;
+        ImageView imageView;
 
         public ViewHolder(View v) {
             super(v);
 
-            cityCheckCard = (CardView) v.findViewById(R.id.city_check_card);
+            //cityCheckCard = (CardView) v.findViewById(R.id.city_check_card);
             cityName = (TextView) v.findViewById(R.id.city_check_name_item);
-            delete = (ImageButton) v.findViewById(R.id.city_check_delete_item);
+            delete = (Button) v.findViewById(R.id.delete);
+            swipeLayout = (SwipeLayout) v.findViewById(R.id.swipe);
+            imageView = (ImageView) v.findViewById(R.id.city_check_image_item);
         }
     }
 
@@ -91,6 +118,5 @@ public class CityCheckListAdapter extends RecyclerView.Adapter<CityCheckListAdap
 
     public interface DeleteCityClickListener<D> {
         void DeleteCityClick(D d, int position);
-
     }
 }

@@ -1,24 +1,26 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp;
 
-import android.app.DialogFragment;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.daimajia.swipe.util.Attributes;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.util.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator;
 
 public class CityCheckListActivity extends AppCompatActivity implements CityCheckListAdapter.ItemCityClickListener<CityCheck>, CityCheckListAdapter.DeleteCityClickListener<CityCheck>{
 
@@ -52,6 +54,16 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
+        // Item Decorator:
+
+        //надо попробовать добавить класс из utils на кликлистенер и может быть все заработает!!!
+
+        //тут что-то не так... метод getDrawable - deprecated есть второй вариант с темой, но я хз пока что как ее создать!!!
+        //и по этому не успев открыться swipe закрывается....
+        recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider)));
+        recyclerView.setItemAnimator(new FadeInLeftAnimator());
+
+        cityCheckListAdapter.setMode(Attributes.Mode.Single);
         recyclerView.setAdapter(cityCheckListAdapter);
         cityCheckListAdapter.notifyDataSetChanged();
 
@@ -84,7 +96,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     }
 
     @Override
-    public void DeleteCityClick(CityCheck v, int position) {
+    public void DeleteCityClick(final CityCheck v, final int position) {
         final int id = Integer.parseInt(v.getId());
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -95,7 +107,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dbAdapter.delRec(id);
-                cityCheckListAdapter.notifyItemRemoved(id);
+
                 dialog.dismiss();
             }
         });
