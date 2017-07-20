@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
+
 /**
  * Created by Maxim_Ozarovskiy on 19.07.2017.
  */
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 public class Dialog extends DialogFragment implements View.OnClickListener {
 
     private int id;
+    private CityCheck cityCheck;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,6 +27,9 @@ public class Dialog extends DialogFragment implements View.OnClickListener {
         v.findViewById(R.id.btnNo).setOnClickListener(this);
 
         return v;
+
+
+
     }
 
     @Override
