@@ -1,13 +1,11 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,7 +42,7 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_test, parent, false);//.inflate(R.layout.city_item, null); standart item view
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_2, parent, false);//.inflate(R.layout.city_item, null); standart item view
 
         ViewHolder holder = new ViewHolder(v);
         return holder;
@@ -57,8 +55,6 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
         holder.swipeLayout.addSwipeListener(new SimpleSwipeListener() {
             @Override
             public void onOpen(SwipeLayout layout) {
-                //если раскоментить будет ошибка... хотя с Pulse работает...
-                //YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
                 YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
             }
         });
@@ -71,6 +67,7 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
                 deleteCityClickListener.DeleteCityClick(cityCheckList.get(position), position);
                 mItemManger.removeShownLayouts(holder.swipeLayout);
                 notifyItemRemoved(position);
+                notifyDataSetChanged();
                 notifyItemRangeChanged(position, cityCheckList.size());
             }
         });

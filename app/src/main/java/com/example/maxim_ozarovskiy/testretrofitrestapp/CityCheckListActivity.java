@@ -10,9 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import com.daimajia.swipe.util.Attributes;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.util.DividerItemDecoration;
@@ -74,6 +78,8 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
                 startActivity(intent);
             }
         });
+
+
     }
 
     protected void onDestroy() {
@@ -97,28 +103,11 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
 
     @Override
     public void DeleteCityClick(final CityCheck v, final int position) {
-        final int id = Integer.parseInt(v.getId());
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Delete this city");
-        alertDialogBuilder.setMessage("Are you shure??");
-        alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dbAdapter.delRec(id);
-
-                dialog.dismiss();
-            }
-        });
-        alertDialogBuilder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-
-
+        int id = Integer.parseInt(v.getId());
+        dbAdapter.delRec(id);
+        Toast.makeText(getApplicationContext(), "City was deleted.", Toast.LENGTH_SHORT).show();
+        recyclerView.removeViewAt(position);
+        cityCheckListAdapter.notifyItemRemoved(position);
+        cityCheckListAdapter.notifyItemRangeChanged(position, cityCheckList.size());
     }
 }
