@@ -23,8 +23,8 @@
         android:layout_alignParentStart="true"/>
     <ImageView
         android:id="@+id/temp_day_detail"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignTop="@+id/weather_status_detail"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -33,98 +33,95 @@
         android:background="@drawable/temp_day_icon"/>
     <ImageView
         android:id="@+id/temp_night_detail"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_alignBottom="@+id/weather_status_detail"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/temp_night_icon"
+        android:layout_above="@+id/weather_status_description"
         android:layout_alignLeft="@+id/temp_day_detail"
-        android:layout_alignStart="@+id/temp_day_detail"
-        android:background="@drawable/temp_night_icon"/>
+        android:layout_alignStart="@+id/temp_day_detail" />
     <TextView
         android:id="@+id/temp_day_text_detail"
-        android:layout_width="95dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textSize="40sp"
         android:textAlignment="center"
         android:layout_alignTop="@+id/temp_day_detail"
-        android:layout_toLeftOf="@+id/temp_day_detail"
-        android:layout_toStartOf="@+id/temp_day_detail"
-        android:layout_marginRight="18dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginTop="12dp" />
+        android:layout_alignLeft="@+id/temp_night_text_detail"
+        android:layout_alignStart="@+id/temp_night_text_detail" />
     <TextView
         android:id="@+id/temp_night_text_detail"
-        android:layout_width="95dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginBottom="11dp"
         android:textSize="40sp"
         android:textAlignment="center"
         android:layout_above="@+id/weather_status_description"
-        android:layout_alignRight="@+id/temp_day_text_detail"
-        android:layout_alignEnd="@+id/temp_day_text_detail" />
+        android:layout_alignRight="@+id/weather_direction_text"
+        android:layout_alignEnd="@+id/weather_direction_text" />
     <ImageView
         android:id="@+id/weather_direction"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_centerVertical="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/compass_one"
+        android:layout_below="@+id/weather_status_description"
         android:layout_alignLeft="@+id/temp_night_detail"
         android:layout_alignStart="@+id/temp_night_detail"
-        android:background="@drawable/compass_one"/>
+        android:layout_marginTop="20dp" />
     <TextView
         android:id="@+id/weather_direction_text"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textSize="40sp"
         android:textAlignment="center"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/temp_night_text_detail"
-        android:layout_alignEnd="@+id/temp_night_text_detail" />
+        android:layout_alignTop="@+id/weather_direction"
+        android:layout_alignRight="@+id/humidity_text_detail"
+        android:layout_alignEnd="@+id/humidity_text_detail" />
     <ImageView
         android:id="@+id/humidity_icon_detail"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/humidity"
         android:layout_below="@+id/weather_direction"
         android:layout_alignLeft="@+id/weather_direction"
         android:layout_alignStart="@+id/weather_direction"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/humidity"/>
+        android:layout_marginTop="20dp" />
     <TextView
         android:id="@+id/humidity_text_detail"
-        android:layout_width="75dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textSize="40sp"
         android:textAlignment="center"
         android:layout_alignTop="@+id/humidity_icon_detail"
-        android:layout_alignRight="@+id/weather_direction_text"
-        android:layout_alignEnd="@+id/weather_direction_text"
-        android:layout_marginTop="11dp" />
+        android:layout_alignRight="@+id/pressure_text_detail"
+        android:layout_alignEnd="@+id/pressure_text_detail" />
     <ImageView
         android:id="@+id/pressure_icon_detail"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/pressure"
         android:layout_below="@+id/humidity_icon_detail"
         android:layout_alignLeft="@+id/humidity_icon_detail"
         android:layout_alignStart="@+id/humidity_icon_detail"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/pressure"/>
+        android:layout_marginTop="23dp" />
     <TextView
         android:id="@+id/pressure_text_detail"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textSize="40sp"
         android:textAlignment="center"
-        android:layout_marginBottom="12dp"
-        android:layout_alignBottom="@+id/pressure_icon_detail"
-        android:layout_alignRight="@+id/humidity_text_detail"
-        android:layout_alignEnd="@+id/humidity_text_detail" />
+        android:layout_alignTop="@+id/pressure_icon_detail"
+        android:layout_toLeftOf="@+id/pressure_icon_detail"
+        android:layout_toStartOf="@+id/pressure_icon_detail"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp" />
     <TextView
         android:id="@+id/weather_status_description"
-        android:layout_width="220dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:textAlignment="center"
         android:textSize="25sp"
         android:layout_below="@+id/weather_status_detail"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignLeft="@+id/weather_status_detail"
+        android:layout_alignStart="@+id/weather_status_detail" />
 
 
 </RelativeLayout>

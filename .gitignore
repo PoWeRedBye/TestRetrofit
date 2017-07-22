@@ -7,3 +7,5 @@
 /build
 /captures
 .externalNativeBuild
+/TestRetrofitRestApp.iml
+/app/app.iml
