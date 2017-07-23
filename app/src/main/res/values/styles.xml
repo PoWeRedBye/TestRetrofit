@@ -7,44 +7,17 @@
         <item name="colorPrimaryDark">@color/my_weather_dark_blue</item>
     </style>
 
-    <!-- Main activity theme. -->
-    <style name="ForecastTheme" parent="AppTheme">
-        <item name="actionBarStyle">@style/ActionBar.Solid.Sunshine.NoTitle</item>
-    </style>
-
-    <!-- main activity action bar styles -->
-    <style name="ActionBar.Solid.Sunshine.NoTitle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="displayOptions">useLogo|showHome</item>
-        <item name="logo">@drawable/one_day</item>
-        <item name="android:fontFamily">cursive</item>
-        <item name="android:text">@string/app_name</item>
-
-
-    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="displayOptions">useLogo|showHome</item>
-        <item name="logo">@drawable/one_day</item>
-        <item name="android:fontFamily">cursive</item>
-        <item name="android:text">@string/app_name</item>
+
 
     </style>
 
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
-    <item name="android:displayOptions">useLogo</item>
-    <item name="logo">@drawable/one_day</item>
-    <item name="android:fontFamily">cursive</item>
-    <item name="android:text">@string/app_name</item>
-    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:displayOptions">useLogo</item>
-        <item name="logo">@drawable/one_day</item>
-        <item name="android:fontFamily">cursive</item>
-        <item name="android:text">@string/app_name</item>
-    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
 
 </resources>

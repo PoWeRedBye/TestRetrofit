@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
@@ -26,7 +27,7 @@ import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator;
 
-public class CityCheckListActivity extends AppCompatActivity implements CityCheckListAdapter.ItemCityClickListener<CityCheck>, CityCheckListAdapter.DeleteCityClickListener<CityCheck>{
+public class CityCheckListActivity extends AppCompatActivity implements CityCheckListAdapter.ItemCityClickListener<CityCheck>, CityCheckListAdapter.DeleteCityClickListener<CityCheck> {
 
     private CityCheckDBAdapter dbAdapter;
     private List<CityCheck> cityCheckList;
@@ -87,7 +88,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
         dbAdapter.close();
     }
 
-    private void initUI(){
+    private void initUI() {
         setTitle("My Weather App");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.city_check_recycler);
@@ -97,17 +98,22 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     @Override
     public void ItemClick(CityCheck v, int position) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("CityCheck",v);
+        intent.putExtra("CityCheck", v);
         startActivity(intent);
     }
 
     @Override
     public void DeleteCityClick(final CityCheck v, final int position) {
         int id = Integer.parseInt(v.getId());
-        dbAdapter.delRec(id);
-        Toast.makeText(getApplicationContext(), "City was deleted.", Toast.LENGTH_SHORT).show();
-        recyclerView.removeViewAt(position);
-        cityCheckListAdapter.notifyItemRemoved(position);
-        cityCheckListAdapter.notifyItemRangeChanged(position, cityCheckList.size());
+        if (id != 0) {
+            dbAdapter.delRec(id);
+            recyclerView.removeViewAt(position);
+            cityCheckListAdapter.notifyItemRemoved(position);
+            cityCheckListAdapter.notifyDataSetChanged();
+            cityCheckListAdapter.notifyItemRangeChanged(position, cityCheckList.size());
+            Toast.makeText(getApplicationContext(), "City was deleted.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "City is not deleted.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

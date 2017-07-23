@@ -2,7 +2,6 @@ package com.example.maxim_ozarovskiy.testretrofitrestapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +19,7 @@ import java.util.List;
  * Created by Maxim_Ozarovskiy on 16.07.2017.
  */
 
-public class ComboActivity extends AppCompatActivity implements MyAdapter.ItemClickListener<ListModel> {
+public class ComboActivity extends AppCompatActivity implements ComboAdapter.ItemClickListener<ListModel> {
 
     TextView cityName;
     TextView currentTemp;
@@ -56,7 +55,7 @@ public class ComboActivity extends AppCompatActivity implements MyAdapter.ItemCl
 
     public static final String sixteenDayBundleExample = "SixteenDayBundleExample";
 
-    private MyAdapter myAdapter;
+    private ComboAdapter comboAdapter;
     private RecyclerView recyclerView;
     private List<ListModel> list;
     private Example example;
@@ -73,11 +72,11 @@ public class ComboActivity extends AppCompatActivity implements MyAdapter.ItemCl
         calcData();
         setData();
         list = example.getList();
-        myAdapter = new MyAdapter(this, list.subList(1, 7),this);
+        comboAdapter = new ComboAdapter(this, list.subList(1, 7),this);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(myAdapter);
-        myAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(comboAdapter);
+        comboAdapter.notifyDataSetChanged();
 
     }
 
@@ -89,9 +88,9 @@ public class ComboActivity extends AppCompatActivity implements MyAdapter.ItemCl
 
         cityName.setText(city_name);
         countryCode.setText(country_code);
-        currentTemp.setText(String.valueOf(currTemp) + " °C");
-        minTemp.setText(String.valueOf(minimalTemp)+" °C");
-        maxTemp.setText(String.valueOf(maximalTemp)+" °C");
+        currentTemp.setText(String.valueOf(currTemp) + "°C");
+        minTemp.setText(String.valueOf(minimalTemp)+"°C");
+        maxTemp.setText(String.valueOf(maximalTemp)+"°C");
         humidity.setText(String.valueOf(humid));
         pressure.setText(String.valueOf(press)+" hPa");
         windSpeed.setText(String.valueOf(wind_speed)+" m/s");

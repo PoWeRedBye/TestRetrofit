@@ -3,4 +3,5 @@
     <string name="sorry_bad_city">Sorry man! Please enter a correct city name</string>
     <string name="no_inet">No inet</string>
     <string name="title_activity_city_check_list">My Weather App</string>
+    <string name="celsius">°C</string>
 </resources>

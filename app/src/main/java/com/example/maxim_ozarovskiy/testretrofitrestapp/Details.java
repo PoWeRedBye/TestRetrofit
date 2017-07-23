@@ -76,8 +76,8 @@ public class Details extends AppCompatActivity{
 
 
         data_details.setText(formattedDate);
-        temp_day_details.setText(String.valueOf(dayTemp) + " °C");
-        temp_night_details.setText(String.valueOf(nightTemp)+" °C");
+        temp_day_details.setText(String.valueOf(dayTemp) + "°C");
+        temp_night_details.setText(String.valueOf(nightTemp)+"°C");
         humidity_details.setText(String.valueOf(humid));
         pressure_details.setText(String.valueOf(press)+" hPa");
         getDirection();

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-sdk tools:overrideLibrary="org.lucasr.twowayview, org.lucasr.twowayview.widget, jp.wasabeef.recyclerview" />
 
     <application
@@ -23,25 +24,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ComboActivity"
-            android:label="My Weather App"
-            android:theme="@style/ForecastTheme">
-        </activity>
-        <activity android:name=".Details"
-            android:label="My Weather App"
-            android:theme="@style/ForecastTheme">
+        <activity android:name=".ComboActivity"></activity>
+        <activity android:name=".Details">
 
         </activity>
-        <activity android:name=".CityAdd"
-            android:label="My Weather App"
-            android:theme="@style/ForecastTheme">
+        <activity android:name=".CityAdd">
 
         </activity>
         <activity
             android:name=".CityCheckListActivity"
             android:label="@string/title_activity_city_check_list"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

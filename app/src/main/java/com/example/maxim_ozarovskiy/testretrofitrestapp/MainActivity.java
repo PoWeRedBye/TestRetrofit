@@ -28,38 +28,16 @@ public class MainActivity extends AppCompatActivity {
 
     Example example;
 
-    /*EditText cityName;
-    ImageView image;
-    Button sixteenDayWeather;*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isValidCity();
-        getSixteenDayWeather();
+        getSevenDayWeather();
         finish();
 
-        //setContentView(R.layout.city_check);
-        //initUI();
-        //initListeners();
+
     }
 
-    /*private void initListeners() {
-        sixteenDayWeather.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isValidCity()) {
-                    getSixteenDayWeather();
-                }
-            }
-        });
-    }*/
-
-    /*private void initUI() {
-        cityName = (EditText) findViewById(R.id.CityCheckName);
-        sixteenDayWeather = (Button) findViewById(R.id.SixTeenDayCheckButton);
-        cityName.setText("Харьков");
-    }*/
 
     private boolean getCityName() {
         cityCheck = getIntent().getParcelableExtra("CityCheck");
@@ -89,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void getSixteenDayWeather() {
+    private void getSevenDayWeather() {
         RESTClient.getInstance().getSixteenDayWeatherExample().getWeatherExample(q, appid, cnt).enqueue(new Callback<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example>() {
 
 

@@ -9,12 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.ListModel;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +20,7 @@ import java.util.List;
  * Created by Maxim_Ozarovskiy on 16.07.2017.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> {
 
     private String weatherImage;
     private int weather_image;
@@ -39,7 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private int dayCels;
     private int nightCels;
 
-    public MyAdapter(Context context, List<ListModel> list, ItemClickListener<ListModel> itemListener) {
+    public ComboAdapter(Context context, List<ListModel> list, ItemClickListener<ListModel> itemListener) {
         this.context = context;
         this.list = list;
         this.itemListener = itemListener;
@@ -47,14 +45,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ComboAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_1, null);
         ViewHolder holder = new ViewHolder(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(MyAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(ComboAdapter.ViewHolder holder, final int position) {
 
         date = list.get(position).getDt();
         Date time = new Date();
@@ -71,8 +69,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         nightCels =(int) tempNightCels;
 
         holder.data_card.setText(formattedDate);
-        holder.temp_night_card.setText(String.valueOf(nightCels)+ " °C");
-        holder.temp_day_card.setText(String.valueOf(dayCels)+ " °C");
+        holder.temp_night_card.setText(String.valueOf(nightCels)+ "°C");
+        holder.temp_day_card.setText(String.valueOf(dayCels)+ "°C");
         weatherImage = list.get(position).getWeather().get(0).getIcon();
         weather_image = getIcon();
         Picasso.with(context).load(weather_image).into(holder.w_status_card);
