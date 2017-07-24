@@ -1,6 +1,6 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp;
 
-import com.example.maxim_ozarovskiy.testretrofitrestapp.WeatherServiceInterface.SixteenDayWeatherService;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.WeatherServiceInterface.SevenDayWeatherService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -55,8 +55,8 @@ public class RESTClient {
                 .build();
     }
 
-    public SixteenDayWeatherService getSixteenDayWeatherExample() {
-        return retrofit.create(SixteenDayWeatherService.class);
+    public SevenDayWeatherService getSevenDayWeatherExample() {
+        return retrofit.create(SevenDayWeatherService.class);
     }
 
 

@@ -64,21 +64,22 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteCityClickListener.DeleteCityClick(cityCheckList.get(position), position);
+                deleteCityClickListener.deleteCityClick(cityCheckList.get(position), position);
                 mItemManger.removeShownLayouts(holder.swipeLayout);
-                notifyItemRemoved(position);
-                notifyDataSetChanged();
-                notifyItemRangeChanged(position, cityCheckList.size());
             }
         });
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemCityClickListener.ItemClick(cityCheckList.get(position), position);
+                itemCityClickListener.itemClick(cityCheckList.get(position), position);
             }
         });
+
     }
+
+
+
 
     @Override
     public int getItemCount() {
@@ -101,7 +102,7 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
         public ViewHolder(View v) {
             super(v);
 
-            //cityCheckCard = (CardView) v.findViewById(R.id.city_check_card);
+
             cityName = (TextView) v.findViewById(R.id.city_check_name_item);
             delete = (Button) v.findViewById(R.id.delete);
             swipeLayout = (SwipeLayout) v.findViewById(R.id.swipe);
@@ -110,10 +111,10 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
     }
 
     public interface ItemCityClickListener<T> {
-        void ItemClick(T v, int position);
+        void itemClick(T v, int position);
     }
 
     public interface DeleteCityClickListener<D> {
-        void DeleteCityClick(D d, int position);
+        void deleteCityClick(D d, int position);
     }
 }

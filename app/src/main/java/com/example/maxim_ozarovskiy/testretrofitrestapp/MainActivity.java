@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getSevenDayWeather() {
-        RESTClient.getInstance().getSixteenDayWeatherExample().getWeatherExample(q, appid, cnt).enqueue(new Callback<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example>() {
+        RESTClient.getInstance().getSevenDayWeatherExample().getWeatherExample(q, appid, cnt).enqueue(new Callback<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example>() {
 
 
             @Override

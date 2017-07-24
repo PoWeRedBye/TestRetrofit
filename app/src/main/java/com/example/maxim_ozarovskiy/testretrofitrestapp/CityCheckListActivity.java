@@ -39,9 +39,6 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     private Toolbar toolbar;
     private CityCheck cityCheck;
 
-    private String idCity;
-    private String CityName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +56,6 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        // Item Decorator:
-
-        //надо попробовать добавить класс из utils на кликлистенер и может быть все заработает!!!
-
-        //тут что-то не так... метод getDrawable - deprecated есть второй вариант с темой, но я хз пока что как ее создать!!!
-        //и по этому не успев открыться swipe закрывается....
         recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider)));
         recyclerView.setItemAnimator(new FadeInLeftAnimator());
 
@@ -96,21 +87,20 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     }
 
     @Override
-    public void ItemClick(CityCheck v, int position) {
+    public void itemClick(CityCheck v, int position) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("CityCheck", v);
         startActivity(intent);
     }
 
     @Override
-    public void DeleteCityClick(final CityCheck v, final int position) {
+    public void deleteCityClick(final CityCheck v, final int position) {
         int id = Integer.parseInt(v.getId());
         if (id != 0) {
             dbAdapter.delRec(id);
-            recyclerView.removeViewAt(position);
+            cityCheckList.remove(position);
             cityCheckListAdapter.notifyItemRemoved(position);
-            cityCheckListAdapter.notifyDataSetChanged();
-            cityCheckListAdapter.notifyItemRangeChanged(position, cityCheckList.size());
+
             Toast.makeText(getApplicationContext(), "City was deleted.", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "City is not deleted.", Toast.LENGTH_SHORT).show();
