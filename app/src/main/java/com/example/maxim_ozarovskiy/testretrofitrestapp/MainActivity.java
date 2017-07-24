@@ -34,10 +34,7 @@ public class MainActivity extends AppCompatActivity {
         isValidCity();
         getSevenDayWeather();
         finish();
-
-
     }
-
 
     private boolean getCityName() {
         cityCheck = getIntent().getParcelableExtra("CityCheck");
@@ -60,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void startThirdActivity() {
         Intent intent = new Intent(getApplicationContext(), ComboActivity.class);
         intent.putExtra(ComboActivity.sixteenDayBundleExample, example);
@@ -69,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void getSevenDayWeather() {
         RESTClient.getInstance().getSevenDayWeatherExample().getWeatherExample(q, appid, cnt).enqueue(new Callback<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example>() {
-
 
             @Override
             public void onResponse(@NonNull Call<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example> call, @NonNull Response<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example> response) {

@@ -1,23 +1,17 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import com.daimajia.swipe.util.Attributes;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.util.DividerItemDecoration;
@@ -96,14 +90,11 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     @Override
     public void deleteCityClick(final CityCheck v, final int position) {
         int id = Integer.parseInt(v.getId());
-        if (id != 0) {
-            dbAdapter.delRec(id);
-            cityCheckList.remove(position);
-            cityCheckListAdapter.notifyItemRemoved(position);
 
-            Toast.makeText(getApplicationContext(), "City was deleted.", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getApplicationContext(), "City is not deleted.", Toast.LENGTH_SHORT).show();
-        }
+        dbAdapter.delRec(id);
+        cityCheckList.remove(position);
+
+        Toast.makeText(getApplicationContext(), "City was deleted.", Toast.LENGTH_SHORT).show();
+
     }
 }

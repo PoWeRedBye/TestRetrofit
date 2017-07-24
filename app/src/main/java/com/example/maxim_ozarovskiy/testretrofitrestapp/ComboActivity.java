@@ -77,7 +77,6 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(comboAdapter);
         comboAdapter.notifyDataSetChanged();
-
     }
 
     private void setData() {

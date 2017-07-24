@@ -66,6 +66,9 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
             public void onClick(View v) {
                 deleteCityClickListener.deleteCityClick(cityCheckList.get(position), position);
                 mItemManger.removeShownLayouts(holder.swipeLayout);
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+                notifyItemRangeChanged(position, cityCheckList.size());
             }
         });
 

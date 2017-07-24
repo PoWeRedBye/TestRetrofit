@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Maxim_Ozarovskiy on 18.07.2017.
  */
 
-public class Details extends AppCompatActivity{
+public class Details extends AppCompatActivity {
 
     TextView data_details;
     TextView temp_day_details;
@@ -58,7 +58,7 @@ public class Details extends AppCompatActivity{
 
     }
 
-    private void initUI(){
+    private void initUI() {
         data_details = (TextView) findViewById(R.id.date_text_detail);
         temp_day_details = (TextView) findViewById(R.id.temp_day_text_detail);
         temp_night_details = (TextView) findViewById(R.id.temp_night_text_detail);
@@ -74,12 +74,11 @@ public class Details extends AppCompatActivity{
         int dayTemp = (int) tempDayCels;
         int nightTemp = (int) tempNightCels;
 
-
         data_details.setText(formattedDate);
         temp_day_details.setText(String.valueOf(dayTemp) + "°C");
-        temp_night_details.setText(String.valueOf(nightTemp)+"°C");
+        temp_night_details.setText(String.valueOf(nightTemp) + "°C");
         humidity_details.setText(String.valueOf(humid));
-        pressure_details.setText(String.valueOf(press)+" hPa");
+        pressure_details.setText(String.valueOf(press) + " hPa");
         getDirection();
         directon_details.setText(direction);
         weather_status_text_details.setText(status);
@@ -92,12 +91,12 @@ public class Details extends AppCompatActivity{
         tempNightCels = tempNight - 273;
     }
 
-    private void getData(){
+    private void getData() {
         list = getIntent().getParcelableExtra("ListModel");
 
         date = list.getDt();
         Date time = new Date();
-        time.setTime(date*1000);
+        time.setTime(date * 1000);
         SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy");
         formattedDate = format.format(time);
         tempDay = list.getTemp().getDay();

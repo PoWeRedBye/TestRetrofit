@@ -14,10 +14,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Maxim_Ozarovskiy on 12.07.2017.
- */
-
 public class RESTClient {
 
     private static final String BASE_URL = "http://api.openweathermap.org/";
