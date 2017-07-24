@@ -49,8 +49,8 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-
+    public void onBindViewHolder(final ViewHolder holder,  int position) {
+       final int pos = holder.getAdapterPosition();
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
         holder.swipeLayout.addSwipeListener(new SimpleSwipeListener() {
             @Override
@@ -59,23 +59,23 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
             }
         });
 
-        holder.cityName.setText(cityCheckList.get(position).getCityCheckName());
+        holder.cityName.setText(cityCheckList.get(pos).getCityCheckName());
 
-        holder.delete.setOnClickListener(new View.OnClickListener() {
+        holder.trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteCityClickListener.deleteCityClick(cityCheckList.get(position), position);
+                deleteCityClickListener.deleteCityClick(cityCheckList.get(pos), pos);
                 mItemManger.removeShownLayouts(holder.swipeLayout);
-                notifyItemRemoved(position);
-                notifyDataSetChanged();
-                notifyItemRangeChanged(position, cityCheckList.size());
+//                notifyItemRemoved(position);
+//                notifyDataSetChanged();
+//                notifyItemRangeChanged(position, cityCheckList.size());
             }
         });
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemCityClickListener.itemClick(cityCheckList.get(position), position);
+                itemCityClickListener.itemClick(cityCheckList.get(pos), pos);
             }
         });
 
@@ -98,18 +98,20 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
 
         //CardView cityCheckCard;
         TextView cityName;
-        Button delete;
+//        Button delete;
         SwipeLayout swipeLayout;
         ImageView imageView;
+        ImageView trash;
 
         public ViewHolder(View v) {
             super(v);
 
 
             cityName = (TextView) v.findViewById(R.id.city_check_name_item);
-            delete = (Button) v.findViewById(R.id.delete);
+//            delete = (Button) v.findViewById(R.id.delete);
             swipeLayout = (SwipeLayout) v.findViewById(R.id.swipe);
             imageView = (ImageView) v.findViewById(R.id.city_check_image_item);
+            trash = (ImageView) v.findViewById(R.id.trash);
         }
     }
 

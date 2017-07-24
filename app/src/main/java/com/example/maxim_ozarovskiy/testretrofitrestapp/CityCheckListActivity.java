@@ -90,10 +90,10 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     @Override
     public void deleteCityClick(final CityCheck v, final int position) {
         int id = Integer.parseInt(v.getId());
-
         dbAdapter.delRec(id);
         cityCheckList.remove(position);
-
+        cityCheckListAdapter.notifyDataSetChanged();
+//        cityCheckListAdapter.notifyItemRemoved(position);
         Toast.makeText(getApplicationContext(), "City was deleted.", Toast.LENGTH_SHORT).show();
 
     }
