@@ -41,7 +41,7 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_2, parent, false);//.inflate(R.layout.city_item, null); standart item view
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_2, parent, false);
 
         ViewHolder holder = new ViewHolder(v);
         return holder;
