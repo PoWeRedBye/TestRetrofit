@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
@@ -28,10 +27,8 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     private RecyclerView recyclerView;
     private CityCheckListAdapter cityCheckListAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ImageButton deleteCityButton;
     private FloatingActionButton addCity;
     private Toolbar toolbar;
-    private CityCheck cityCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

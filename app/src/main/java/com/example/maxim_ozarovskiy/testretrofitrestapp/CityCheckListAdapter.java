@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -78,9 +77,6 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
 
     }
 
-
-
-
     @Override
     public int getItemCount() {
         return cityCheckList.size();
@@ -93,9 +89,7 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        //CardView cityCheckCard;
         TextView cityName;
-//        Button delete;
         SwipeLayout swipeLayout;
         ImageView imageView;
         ImageView trash;
@@ -103,9 +97,7 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
         public ViewHolder(View v) {
             super(v);
 
-
             cityName = (TextView) v.findViewById(R.id.city_check_name_item);
-//            delete = (Button) v.findViewById(R.id.delete);
             swipeLayout = (SwipeLayout) v.findViewById(R.id.swipe);
             imageView = (ImageView) v.findViewById(R.id.city_check_image_item);
             trash = (ImageView) v.findViewById(R.id.trash);
