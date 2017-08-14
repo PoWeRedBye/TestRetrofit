@@ -7,25 +7,25 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
+import io.realm.RealmModel;
 
-public class ListModel implements Parcelable {
+public class WeatherForDayModel implements Parcelable {
 
     @SerializedName("dt")
     @Expose
     private Integer dt;
-    @SerializedName("temp")
+    @SerializedName("temperatureModel")
     @Expose
-    private Temp temp;
+    private TemperatureModel temperatureModel;
     @SerializedName("pressure")
     @Expose
     private Double pressure;
     @SerializedName("humidity")
     @Expose
     private Integer humidity;
-    @SerializedName("weather")
+    @SerializedName("weatherDescriptionModel")
     @Expose
-    private ArrayList<Weather> weather;
+    private ArrayList<WeatherDescriptionModel> weatherDescriptionModel;
     @SerializedName("speed")
     @Expose
     private Double speed;
@@ -50,12 +50,12 @@ public class ListModel implements Parcelable {
         this.dt = dt;
     }
 
-    public Temp getTemp() {
-        return temp;
+    public TemperatureModel getTemperatureModel() {
+        return temperatureModel;
     }
 
-    public void setTemp(Temp temp) {
-        this.temp = temp;
+    public void setTemperatureModel(TemperatureModel temperatureModel) {
+        this.temperatureModel = temperatureModel;
     }
 
     public Double getPressure() {
@@ -114,12 +114,17 @@ public class ListModel implements Parcelable {
         this.snow = snow;
     }
 
-    public ArrayList<Weather> getWeather() {
-        return weather;
+    public ArrayList<WeatherDescriptionModel> getWeatherDescriptionModel() {
+        return weatherDescriptionModel;
     }
 
-    public void setWeather(ArrayList<Weather> weather) {
-        this.weather = weather;
+    public void setWeatherDescriptionModel(ArrayList<WeatherDescriptionModel> weatherDescriptionModel) {
+        this.weatherDescriptionModel = weatherDescriptionModel;
+    }
+
+
+
+    public WeatherForDayModel() {
     }
 
     @Override
@@ -130,10 +135,10 @@ public class ListModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(this.dt);
-        dest.writeParcelable(this.temp, flags);
+        dest.writeParcelable(this.temperatureModel, flags);
         dest.writeValue(this.pressure);
         dest.writeValue(this.humidity);
-        dest.writeTypedList(this.weather);
+        dest.writeTypedList(this.weatherDescriptionModel);
         dest.writeValue(this.speed);
         dest.writeValue(this.deg);
         dest.writeValue(this.clouds);
@@ -141,15 +146,12 @@ public class ListModel implements Parcelable {
         dest.writeValue(this.snow);
     }
 
-    public ListModel() {
-    }
-
-    protected ListModel(Parcel in) {
+    protected WeatherForDayModel(Parcel in) {
         this.dt = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.temp = in.readParcelable(Temp.class.getClassLoader());
+        this.temperatureModel = in.readParcelable(TemperatureModel.class.getClassLoader());
         this.pressure = (Double) in.readValue(Double.class.getClassLoader());
         this.humidity = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.weather = in.createTypedArrayList(Weather.CREATOR);
+        this.weatherDescriptionModel = in.createTypedArrayList(WeatherDescriptionModel.CREATOR);
         this.speed = (Double) in.readValue(Double.class.getClassLoader());
         this.deg = (Double) in.readValue(Double.class.getClassLoader());
         this.clouds = (Integer) in.readValue(Integer.class.getClassLoader());
@@ -157,15 +159,15 @@ public class ListModel implements Parcelable {
         this.snow = (Double) in.readValue(Double.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<ListModel> CREATOR = new Parcelable.Creator<ListModel>() {
+    public static final Parcelable.Creator<WeatherForDayModel> CREATOR = new Parcelable.Creator<WeatherForDayModel>() {
         @Override
-        public ListModel createFromParcel(Parcel source) {
-            return new ListModel(source);
+        public WeatherForDayModel createFromParcel(Parcel source) {
+            return new WeatherForDayModel(source);
         }
 
         @Override
-        public ListModel[] newArray(int size) {
-            return new ListModel[size];
+        public WeatherForDayModel[] newArray(int size) {
+            return new WeatherForDayModel[size];
         }
     };
 }

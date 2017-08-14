@@ -8,11 +8,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class Example implements Parcelable {
+public class WeatherByCityModel implements Parcelable {
 
-    @SerializedName("city")
+    @SerializedName("weatherByCity")
     @Expose
-    private City city;
+    private WeatherByCity weatherByCity;
     @SerializedName("cod")
     @Expose
     private String cod;
@@ -22,24 +22,24 @@ public class Example implements Parcelable {
     @SerializedName("cnt")
     @Expose
     private Integer cnt;
-    @SerializedName("list")
+    @SerializedName("weatherForDayModelList")
     @Expose
-    private ArrayList<ListModel> list;
+    private ArrayList<WeatherForDayModel> weatherForDayModelList;
 
-    public ArrayList<ListModel> getList() {
-        return list;
+    public ArrayList<WeatherForDayModel> getWeatherForDayModelList() {
+        return weatherForDayModelList;
     }
 
-    public void setList(ArrayList<ListModel> list) {
-        this.list = list;
+    public void setWeatherForDayModelList(ArrayList<WeatherForDayModel> weatherForDayModelList) {
+        this.weatherForDayModelList = weatherForDayModelList;
     }
 
-    public City getCity() {
-        return city;
+    public WeatherByCity getWeatherByCity() {
+        return weatherByCity;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setWeatherByCity(WeatherByCity weatherByCity) {
+        this.weatherByCity = weatherByCity;
     }
 
     public String getCod() {
@@ -73,33 +73,33 @@ public class Example implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.city, flags);
+        dest.writeParcelable(this.weatherByCity, flags);
         dest.writeString(this.cod);
         dest.writeValue(this.message);
         dest.writeValue(this.cnt);
-        dest.writeTypedList(this.list);
+        dest.writeTypedList(this.weatherForDayModelList);
     }
 
-    public Example() {
+    public WeatherByCityModel() {
     }
 
-    protected Example(Parcel in) {
-        this.city = in.readParcelable(City.class.getClassLoader());
+    protected WeatherByCityModel(Parcel in) {
+        this.weatherByCity = in.readParcelable(WeatherByCity.class.getClassLoader());
         this.cod = in.readString();
         this.message = (Double) in.readValue(Double.class.getClassLoader());
         this.cnt = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.list = in.createTypedArrayList(ListModel.CREATOR);
+        this.weatherForDayModelList = in.createTypedArrayList(WeatherForDayModel.CREATOR);
     }
 
-    public static final Parcelable.Creator<Example> CREATOR = new Parcelable.Creator<Example>() {
+    public static final Parcelable.Creator<WeatherByCityModel> CREATOR = new Parcelable.Creator<WeatherByCityModel>() {
         @Override
-        public Example createFromParcel(Parcel source) {
-            return new Example(source);
+        public WeatherByCityModel createFromParcel(Parcel source) {
+            return new WeatherByCityModel(source);
         }
 
         @Override
-        public Example[] newArray(int size) {
-            return new Example[size];
+        public WeatherByCityModel[] newArray(int size) {
+            return new WeatherByCityModel[size];
         }
     };
 }

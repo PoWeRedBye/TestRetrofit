@@ -6,7 +6,9 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Weather implements Parcelable {
+import io.realm.RealmModel;
+
+public class WeatherDescriptionModel implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -20,14 +22,14 @@ public class Weather implements Parcelable {
     @SerializedName("icon")
     @Expose
     private String icon;
-    public final static Parcelable.Creator<Weather> CREATOR = new Creator<Weather>() {
+    public final static Parcelable.Creator<WeatherDescriptionModel> CREATOR = new Creator<WeatherDescriptionModel>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public Weather createFromParcel(Parcel in) {
-            Weather instance = new Weather();
+        public WeatherDescriptionModel createFromParcel(Parcel in) {
+            WeatherDescriptionModel instance = new WeatherDescriptionModel();
             instance.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
             instance.main = ((String) in.readValue((String.class.getClassLoader())));
             instance.description = ((String) in.readValue((String.class.getClassLoader())));
@@ -35,8 +37,8 @@ public class Weather implements Parcelable {
             return instance;
         }
 
-        public Weather[] newArray(int size) {
-            return (new Weather[size]);
+        public WeatherDescriptionModel[] newArray(int size) {
+            return (new WeatherDescriptionModel[size]);
         }
 
     };

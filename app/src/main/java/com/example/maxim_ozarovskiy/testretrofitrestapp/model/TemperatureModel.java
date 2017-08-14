@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Temp implements Parcelable {
+public class TemperatureModel implements Parcelable {
 
     @SerializedName("day")
     @Expose
@@ -26,14 +26,14 @@ public class Temp implements Parcelable {
     @SerializedName("morn")
     @Expose
     private Double morn;
-    public final static Parcelable.Creator<Temp> CREATOR = new Creator<Temp>() {
+    public final static Parcelable.Creator<TemperatureModel> CREATOR = new Creator<TemperatureModel>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public Temp createFromParcel(Parcel in) {
-            Temp instance = new Temp();
+        public TemperatureModel createFromParcel(Parcel in) {
+            TemperatureModel instance = new TemperatureModel();
             instance.day = ((Double) in.readValue((Double.class.getClassLoader())));
             instance.min = ((Double) in.readValue((Double.class.getClassLoader())));
             instance.max = ((Double) in.readValue((Double.class.getClassLoader())));
@@ -43,8 +43,8 @@ public class Temp implements Parcelable {
             return instance;
         }
 
-        public Temp[] newArray(int size) {
-            return (new Temp[size]);
+        public TemperatureModel[] newArray(int size) {
+            return (new TemperatureModel[size]);
         }
 
     };

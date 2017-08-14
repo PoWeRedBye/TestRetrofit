@@ -5,14 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherByCityModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private CityCheck cityCheck;
 
-    Example example;
+    WeatherByCityModel weatherByCityModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         String s = cityCheck.getCityCheckName();
         if (TextUtils.isEmpty(s)) {
-            Toast.makeText(getApplicationContext(), "Please enter the City Name!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please enter the WeatherByCity Name!!", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             q = s;
@@ -59,17 +55,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void startThirdActivity() {
         Intent intent = new Intent(getApplicationContext(), ComboActivity.class);
-        intent.putExtra(ComboActivity.sixteenDayBundleExample, example);
+        intent.putExtra(ComboActivity.sixteenDayBundleExample, weatherByCityModel);
         startActivity(intent);
     }
 
     private void getSevenDayWeather() {
-        RESTClient.getInstance().getSevenDayWeatherExample().getWeatherExample(q, appid, cnt).enqueue(new Callback<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example>() {
+        RESTClient.getInstance().getSevenDayWeatherExample().getWeatherExample(q, appid, cnt).enqueue(new Callback<WeatherByCityModel>() {
 
             @Override
-            public void onResponse(@NonNull Call<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example> call, @NonNull Response<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example> response) {
+            public void onResponse(@NonNull Call<WeatherByCityModel> call, @NonNull Response<WeatherByCityModel> response) {
                 if (response.isSuccessful()) {
-                    example = response.body();
+                    weatherByCityModel = response.body();
                     startThirdActivity();
                 } else {
                     Toast.makeText(MainActivity.this, R.string.sorry_bad_city, Toast.LENGTH_SHORT).show();
@@ -77,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<WeatherByCityModel> call, @NonNull Throwable t) {
                 Toast.makeText(MainActivity.this, R.string.no_inet, Toast.LENGTH_SHORT).show();
             }
         });

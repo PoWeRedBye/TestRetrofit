@@ -39,10 +39,10 @@ public class CityAdd extends AppCompatActivity {
                 cityName = cityAdd.getText().toString();
                 if (isValidData()) {
                     dbAdapter.createCityField(cityName);
-                    Toast.makeText(getApplicationContext(), "You added a City", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "You added a WeatherByCity", Toast.LENGTH_SHORT).show();
                     returnHome();
                 } else {
-                    Toast.makeText(getApplicationContext(), "City is not added!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "WeatherByCity is not added!!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -51,7 +51,7 @@ public class CityAdd extends AppCompatActivity {
 
     private boolean isValidData() {
         if (TextUtils.isEmpty(cityName)) {
-            Toast.makeText(getApplicationContext(), "Please enter the City!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please enter the WeatherByCity!!", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
@@ -59,7 +59,7 @@ public class CityAdd extends AppCompatActivity {
     }
 
     private void initUI() {
-        setTitle("City Add");
+        setTitle("WeatherByCity Add");
         cityAdd = (EditText) findViewById(R.id.city_add_text);
         citySave = (Button) findViewById(R.id.city_add_button);
     }

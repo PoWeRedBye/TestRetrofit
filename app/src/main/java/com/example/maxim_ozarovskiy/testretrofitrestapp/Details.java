@@ -1,17 +1,15 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.ListModel;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherForDayModel;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Maxim_Ozarovskiy on 18.07.2017.
@@ -45,12 +43,12 @@ public class Details extends AppCompatActivity {
     private int weather_image;
     private String formattedDate;
 
-    private ListModel list;
+    private WeatherForDayModel list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_list);
+        setContentView(R.layout.weather_per_day_details);
         initUI();
         getData();
         calcData();
@@ -92,20 +90,20 @@ public class Details extends AppCompatActivity {
     }
 
     private void getData() {
-        list = getIntent().getParcelableExtra("ListModel");
+        list = getIntent().getParcelableExtra("WeatherForDayModel");
 
         date = list.getDt();
         Date time = new Date();
         time.setTime(date * 1000);
         SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy");
         formattedDate = format.format(time);
-        tempDay = list.getTemp().getDay();
-        tempNight = list.getTemp().getNight();
+        tempDay = list.getTemperatureModel().getDay();
+        tempNight = list.getTemperatureModel().getNight();
         humid = list.getHumidity();
         press = list.getPressure();
         wind_degree = list.getDeg();
-        weatherImage = list.getWeather().get(0).getIcon();
-        status = list.getWeather().get(0).getMain();
+        weatherImage = list.getWeatherDescriptionModel().get(0).getIcon();
+        status = list.getWeatherDescriptionModel().get(0).getMain();
     }
 
     private void getDirection() {

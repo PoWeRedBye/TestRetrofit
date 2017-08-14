@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.ListModel;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherForDayModel;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -25,8 +25,8 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
     private String weatherImage;
     private int weather_image;
     private Context context;
-    private List<ListModel> list;
-    private ItemClickListener<ListModel> itemListener;
+    private List<WeatherForDayModel> list;
+    private ItemClickListener<WeatherForDayModel> itemListener;
 
     private long date;
 
@@ -37,7 +37,7 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
     private int dayCels;
     private int nightCels;
 
-    public ComboAdapter(Context context, List<ListModel> list, ItemClickListener<ListModel> itemListener) {
+    public ComboAdapter(Context context, List<WeatherForDayModel> list, ItemClickListener<WeatherForDayModel> itemListener) {
         this.context = context;
         this.list = list;
         this.itemListener = itemListener;
@@ -46,7 +46,7 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
 
     @Override
     public ComboAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_1, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.weather_per_day_item, null);
         ViewHolder holder = new ViewHolder(v);
         return holder;
     }
@@ -60,18 +60,18 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
         SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy");
         String formattedDate = format.format(time);
 
-        dayKelvin = list.get(position).getTemp().getDay();
+        dayKelvin = list.get(position).getTemperatureModel().getDay();
         tempDayCels = dayKelvin - 273;
         dayCels = (int) tempDayCels;
 
-        nightKelvin = list.get(position).getTemp().getNight();
+        nightKelvin = list.get(position).getTemperatureModel().getNight();
         tempNightCels = nightKelvin - 273;
         nightCels =(int) tempNightCels;
 
         holder.data_card.setText(formattedDate);
         holder.temp_night_card.setText(String.valueOf(nightCels)+ "°C");
         holder.temp_day_card.setText(String.valueOf(dayCels)+ "°C");
-        weatherImage = list.get(position).getWeather().get(0).getIcon();
+        weatherImage = list.get(position).getWeatherDescriptionModel().get(0).getIcon();
         weather_image = getIcon();
         Picasso.with(context).load(weather_image).into(holder.w_status_card);
 

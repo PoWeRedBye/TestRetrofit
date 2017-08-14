@@ -1,6 +1,6 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp.WeatherServiceInterface;
 
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherByCityModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 public interface SevenDayWeatherService {
 
     @GET("data/2.5/forecast/daily")
-    Call<Example> getWeatherExample(@Query("q") String q,
-                                    @Query("appid") String appid,
-                                    @Query("cnt") String cnt);
+    Call<WeatherByCityModel> getWeatherExample(@Query("q") String q,
+                                               @Query("appid") String appid,
+                                               @Query("cnt") String cnt);
 }

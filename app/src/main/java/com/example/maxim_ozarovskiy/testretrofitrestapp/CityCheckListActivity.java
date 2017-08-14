@@ -71,7 +71,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     }
 
     private void initUI() {
-        setTitle("My Weather App");
+        setTitle("My WeatherDescriptionModel App");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.city_check_recycler);
         addCity = (FloatingActionButton) findViewById(R.id.fab);
@@ -90,7 +90,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
         dbAdapter.delRec(id);
         cityCheckList.remove(position);
         cityCheckListAdapter.notifyDataSetChanged();
-        Toast.makeText(getApplicationContext(), "City was deleted.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "WeatherByCity was deleted.", Toast.LENGTH_SHORT).show();
 
     }
 }

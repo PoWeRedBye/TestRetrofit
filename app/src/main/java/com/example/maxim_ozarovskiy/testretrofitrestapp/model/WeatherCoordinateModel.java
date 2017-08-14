@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Coord implements Parcelable {
+public class WeatherCoordinateModel implements Parcelable {
 
     @SerializedName("lon")
     @Expose
@@ -14,21 +14,21 @@ public class Coord implements Parcelable {
     @SerializedName("lat")
     @Expose
     private Double lat;
-    public final static Parcelable.Creator<Coord> CREATOR = new Creator<Coord>() {
+    public final static Parcelable.Creator<WeatherCoordinateModel> CREATOR = new Creator<WeatherCoordinateModel>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public Coord createFromParcel(Parcel in) {
-            Coord instance = new Coord();
+        public WeatherCoordinateModel createFromParcel(Parcel in) {
+            WeatherCoordinateModel instance = new WeatherCoordinateModel();
             instance.lon = ((Double) in.readValue((Double.class.getClassLoader())));
             instance.lat = ((Double) in.readValue((Double.class.getClassLoader())));
             return instance;
         }
 
-        public Coord[] newArray(int size) {
-            return (new Coord[size]);
+        public WeatherCoordinateModel[] newArray(int size) {
+            return (new WeatherCoordinateModel[size]);
         }
 
     };

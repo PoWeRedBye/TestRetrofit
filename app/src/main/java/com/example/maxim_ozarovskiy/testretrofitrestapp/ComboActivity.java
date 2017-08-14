@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.Example;
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.ListModel;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherByCityModel;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherForDayModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Maxim_Ozarovskiy on 16.07.2017.
  */
 
-public class ComboActivity extends AppCompatActivity implements ComboAdapter.ItemClickListener<ListModel> {
+public class ComboActivity extends AppCompatActivity implements ComboAdapter.ItemClickListener<WeatherForDayModel> {
 
     TextView cityName;
     TextView currentTemp;
@@ -57,21 +57,21 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
 
     private ComboAdapter comboAdapter;
     private RecyclerView recyclerView;
-    private List<ListModel> list;
-    private Example example;
+    private List<WeatherForDayModel> list;
+    private WeatherByCityModel weatherByCityModel;
     private RecyclerView.LayoutManager mLayoutManager;
     private RelativeLayout relativeLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.combo_activity_1);
+        setContentView(R.layout.combo_activity);
 
         initUI();
         getData();
         calcData();
         setData();
-        list = example.getList();
+        list = weatherByCityModel.getWeatherForDayModelList();
         comboAdapter = new ComboAdapter(this, list.subList(1, 7),this);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -100,7 +100,7 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
     }
 
     private void initUI() {
-        setTitle("My Weather App");
+        setTitle("My WeatherDescriptionModel App");
         cityName = (TextView) findViewById(R.id.city_name_combo_1);
         currentTemp = (TextView) findViewById(R.id.current_temp_combo_1);
         minTemp = (TextView) findViewById(R.id.temp_min_text_combo_1);
@@ -119,18 +119,18 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
 
     private void getData() {
         if (getIntent() != null && getIntent().hasExtra(sixteenDayBundleExample)) {
-            example = getIntent().getParcelableExtra(sixteenDayBundleExample);
+            weatherByCityModel = getIntent().getParcelableExtra(sixteenDayBundleExample);
         }
-        city_name = example.getCity().getName();
-        country_code = example.getCity().getCountry();
-        curr_temp = example.getList().get(0).getTemp().getDay();
-        min_temp = example.getList().get(0).getTemp().getMin();
-        max_temp = example.getList().get(0).getTemp().getMax();
-        humid = example.getList().get(0).getHumidity();
-        press = example.getList().get(0).getPressure();
-        wind_speed = example.getList().get(0).getSpeed();
-        wind_degree = example.getList().get(0).getDeg();
-        weatherImage = example.getList().get(0).getWeather().get(0).getIcon();
+        city_name = weatherByCityModel.getWeatherByCity().getName();
+        country_code = weatherByCityModel.getWeatherByCity().getCountry();
+        curr_temp = weatherByCityModel.getWeatherForDayModelList().get(0).getTemperatureModel().getDay();
+        min_temp = weatherByCityModel.getWeatherForDayModelList().get(0).getTemperatureModel().getMin();
+        max_temp = weatherByCityModel.getWeatherForDayModelList().get(0).getTemperatureModel().getMax();
+        humid = weatherByCityModel.getWeatherForDayModelList().get(0).getHumidity();
+        press = weatherByCityModel.getWeatherForDayModelList().get(0).getPressure();
+        wind_speed = weatherByCityModel.getWeatherForDayModelList().get(0).getSpeed();
+        wind_degree = weatherByCityModel.getWeatherForDayModelList().get(0).getDeg();
+        weatherImage = weatherByCityModel.getWeatherForDayModelList().get(0).getWeatherDescriptionModel().get(0).getIcon();
     }
 
     private void calcData() {
@@ -203,9 +203,9 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
     }
 
     @Override
-    public void ItemClick(ListModel v, int position) {
+    public void ItemClick(WeatherForDayModel v, int position) {
         Intent intent = new Intent(getApplicationContext(), Details.class);
-        intent.putExtra("ListModel", v);
+        intent.putExtra("WeatherForDayModel", v);
         startActivity(intent);
     }
 }

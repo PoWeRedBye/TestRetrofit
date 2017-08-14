@@ -6,10 +6,11 @@
     <color name="sunshine_light_blue">#ff64c2f4</color>
     <color name="sunshine_blue">#ff1ca8f4</color>
     <color name="my_weather_dark_blue">#0288D1</color>
-    <color name="backgroundColor">#E8E8E0</color>
+    <color name="backgroundColor">#e8e8e0</color>
     <color name="backgroundColorPress">#DBDBD3</color>
     <color name="red">#FF3B00</color>
     <color name="red_press">#990000</color>
     <color name="dark_gray">#4C535B</color>
     <color name="dark_gray_press">#ff7e8a97</color>
+    <color name="combo_light_blue">#1a90d9</color>
 </resources>
