@@ -85,19 +85,14 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         super.onCreate(savedInstanceState);
         setContentView(R.layout.combo_activity);
 
-        isValidCity();
-        getSevenDayWeather();
+        if (isValidCity()) {
+            getSevenDayWeather();
+        }
+
 
         initUI();
-        getData();
-        calcData();
-        setData();
-        weatherForDayList = weatherByCityModel.getWeatherForDayModelList();
-        comboAdapter = new ComboAdapter(this, weatherForDayList.subList(1, 7),this);
-        mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(comboAdapter);
-        comboAdapter.notifyDataSetChanged();
+
+
     }
 
     private void setData() {
@@ -109,11 +104,11 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         cityName.setText(city_name);
         countryCode.setText(country_code);
         currentTemp.setText(String.valueOf(currTemp) + "°C");
-        minTemp.setText(String.valueOf(minimalTemp)+"°C");
-        maxTemp.setText(String.valueOf(maximalTemp)+"°C");
+        minTemp.setText(String.valueOf(minimalTemp) + "°C");
+        maxTemp.setText(String.valueOf(maximalTemp) + "°C");
         humidity.setText(String.valueOf(humid));
-        pressure.setText(String.valueOf(press)+" hPa");
-        windSpeed.setText(String.valueOf(wind_speed)+" m/s");
+        pressure.setText(String.valueOf(press) + " hPa");
+        windSpeed.setText(String.valueOf(wind_speed) + " m/s");
         getDirection();
         windDegree.setText(direction);
         weather_image = getIcon();
@@ -142,6 +137,8 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         /*if (getIntent() != null && getIntent().hasExtra(sixteenDayBundleExample)) {
             weatherByCityModel = getIntent().getParcelableExtra(sixteenDayBundleExample);
         }*/
+
+
         city_name = weatherByCityModel.getWeatherByCity().getName();
         country_code = weatherByCityModel.getWeatherByCity().getCountry();
         curr_temp = weatherByCityModel.getWeatherForDayModelList().get(0).getTemperatureModel().getDay();
@@ -239,6 +236,7 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
             public void onResponse(@NonNull Call<WeatherByCityModel> call, @NonNull Response<WeatherByCityModel> response) {
                 if (response.isSuccessful()) {
                     weatherByCityModel = response.body();
+                    updateUI();
                 } else {
                     Toast.makeText(ComboActivity.this, R.string.sorry_bad_city, Toast.LENGTH_SHORT).show();
                 }
@@ -248,7 +246,22 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
             public void onFailure(@NonNull Call<WeatherByCityModel> call, @NonNull Throwable t) {
                 Toast.makeText(ComboActivity.this, R.string.no_inet, Toast.LENGTH_SHORT).show();
             }
+
         });
+    }
+
+    public void updateUI() {
+
+        getData();
+        calcData();
+        setData();
+        weatherForDayList = weatherByCityModel.getWeatherForDayModelList();
+        comboAdapter = new ComboAdapter(this, weatherForDayList.subList(1, 7), this);
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(comboAdapter);
+        comboAdapter.notifyDataSetChanged();
+
     }
 
     private boolean getCityName() {
