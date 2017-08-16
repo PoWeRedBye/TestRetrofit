@@ -1,4 +1,4 @@
-package com.example.maxim_ozarovskiy.testretrofitrestapp;
+package com.example.maxim_ozarovskiy.testretrofitrestapp.Activities;
 
 
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters.CityCheckDBAdapter;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters.CityCheckListAdapter;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.MainActivity;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.util.DividerItemDecoration;
 
@@ -57,7 +61,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
         addCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CityAdd.class);
+                Intent intent = new Intent(getApplicationContext(), NewCityActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,7 +83,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
 
     @Override
     public void itemClick(CityCheck v, int position) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ComboActivity.class);
         intent.putExtra("CityCheck", v);
         startActivity(intent);
     }

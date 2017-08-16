@@ -1,4 +1,4 @@
-package com.example.maxim_ozarovskiy.testretrofitrestapp;
+package com.example.maxim_ozarovskiy.testretrofitrestapp.Network;
 
 import com.example.maxim_ozarovskiy.testretrofitrestapp.WeatherServiceInterface.SevenDayWeatherService;
 import com.google.gson.Gson;

@@ -1,4 +1,4 @@
-package com.example.maxim_ozarovskiy.testretrofitrestapp;
+package com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +13,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
 
 import java.util.List;

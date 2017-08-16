@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/one_day"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,15 +24,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ComboActivity"></activity>
-        <activity android:name=".Details">
+        <activity android:name=".Activities.ComboActivity"></activity>
+        <activity android:name=".Activities.WeatherDetailsActivity">
 
         </activity>
-        <activity android:name=".CityAdd">
+        <activity android:name=".Activities.NewCityActivity">
 
         </activity>
         <activity
-            android:name=".CityCheckListActivity"
+            android:name=".Activities.CityCheckListActivity"
             android:label="@string/title_activity_city_check_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

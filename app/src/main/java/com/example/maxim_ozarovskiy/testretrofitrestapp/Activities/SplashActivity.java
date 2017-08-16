@@ -1,4 +1,4 @@
-package com.example.maxim_ozarovskiy.testretrofitrestapp;
+package com.example.maxim_ozarovskiy.testretrofitrestapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
 
 /**
  * Created by Maxim_Ozarovskiy on 19.07.2017.

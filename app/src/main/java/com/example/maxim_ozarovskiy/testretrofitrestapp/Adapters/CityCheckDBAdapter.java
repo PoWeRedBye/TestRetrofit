@@ -1,4 +1,4 @@
-package com.example.maxim_ozarovskiy.testretrofitrestapp;
+package com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.example.maxim_ozarovskiy.testretrofitrestapp;
+package com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherForDayModel;
 import com.squareup.picasso.Picasso;
 

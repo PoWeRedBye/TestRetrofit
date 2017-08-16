@@ -1,10 +1,11 @@
-package com.example.maxim_ozarovskiy.testretrofitrestapp;
+package com.example.maxim_ozarovskiy.testretrofitrestapp.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherForDayModel;
 import com.squareup.picasso.Picasso;
 
@@ -15,7 +16,7 @@ import java.util.Date;
  * Created by Maxim_Ozarovskiy on 18.07.2017.
  */
 
-public class Details extends AppCompatActivity {
+public class WeatherDetailsActivity extends AppCompatActivity {
 
     TextView data_details;
     TextView temp_day_details;

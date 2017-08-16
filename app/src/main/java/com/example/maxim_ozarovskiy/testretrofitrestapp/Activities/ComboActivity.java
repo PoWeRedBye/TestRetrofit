@@ -1,19 +1,31 @@
-package com.example.maxim_ozarovskiy.testretrofitrestapp;
+package com.example.maxim_ozarovskiy.testretrofitrestapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters.ComboAdapter;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.MainActivity;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.Network.RESTClient;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherByCityModel;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherForDayModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Maxim_Ozarovskiy on 16.07.2017.
@@ -53,11 +65,17 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
     private String weatherImage;
     private int weather_image;
 
+    private String q;
+    private String appid = "2fa8c9a46e8ac6ad4bcc4f4fc48e5865";
+    private String cnt = "7";
+
+    private CityCheck cityCheck;
+
     public static final String sixteenDayBundleExample = "SixteenDayBundleExample";
 
     private ComboAdapter comboAdapter;
     private RecyclerView recyclerView;
-    private List<WeatherForDayModel> list;
+    private List<WeatherForDayModel> weatherForDayList;
     private WeatherByCityModel weatherByCityModel;
     private RecyclerView.LayoutManager mLayoutManager;
     private RelativeLayout relativeLayout;
@@ -67,12 +85,15 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         super.onCreate(savedInstanceState);
         setContentView(R.layout.combo_activity);
 
+        isValidCity();
+        getSevenDayWeather();
+
         initUI();
         getData();
         calcData();
         setData();
-        list = weatherByCityModel.getWeatherForDayModelList();
-        comboAdapter = new ComboAdapter(this, list.subList(1, 7),this);
+        weatherForDayList = weatherByCityModel.getWeatherForDayModelList();
+        comboAdapter = new ComboAdapter(this, weatherForDayList.subList(1, 7),this);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(comboAdapter);
@@ -118,9 +139,9 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
     }
 
     private void getData() {
-        if (getIntent() != null && getIntent().hasExtra(sixteenDayBundleExample)) {
+        /*if (getIntent() != null && getIntent().hasExtra(sixteenDayBundleExample)) {
             weatherByCityModel = getIntent().getParcelableExtra(sixteenDayBundleExample);
-        }
+        }*/
         city_name = weatherByCityModel.getWeatherByCity().getName();
         country_code = weatherByCityModel.getWeatherByCity().getCountry();
         curr_temp = weatherByCityModel.getWeatherForDayModelList().get(0).getTemperatureModel().getDay();
@@ -139,6 +160,7 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         tempMinCels = min_temp - 273;
     }
 
+    //translate from EU to RUS
     private void getDirection() {
         direction = "Unknown";
         if (wind_degree >= 337.5 || wind_degree < 22.5) {
@@ -160,6 +182,7 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         }
     }
 
+    //add background color for any status description!!!
     public int getIcon() {
         switch (weatherImage) {
             case "01d":
@@ -204,8 +227,49 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
 
     @Override
     public void ItemClick(WeatherForDayModel v, int position) {
-        Intent intent = new Intent(getApplicationContext(), Details.class);
+        Intent intent = new Intent(getApplicationContext(), WeatherDetailsActivity.class);
         intent.putExtra("WeatherForDayModel", v);
         startActivity(intent);
     }
+
+    private void getSevenDayWeather() {
+        RESTClient.getInstance().getSevenDayWeatherExample().getWeatherExample(q, appid, cnt).enqueue(new Callback<WeatherByCityModel>() {
+
+            @Override
+            public void onResponse(@NonNull Call<WeatherByCityModel> call, @NonNull Response<WeatherByCityModel> response) {
+                if (response.isSuccessful()) {
+                    weatherByCityModel = response.body();
+                } else {
+                    Toast.makeText(ComboActivity.this, R.string.sorry_bad_city, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<WeatherByCityModel> call, @NonNull Throwable t) {
+                Toast.makeText(ComboActivity.this, R.string.no_inet, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private boolean getCityName() {
+        cityCheck = getIntent().getParcelableExtra("CityCheck");
+
+        String s = cityCheck.getCityCheckName();
+        if (TextUtils.isEmpty(s)) {
+            Toast.makeText(getApplicationContext(), "Please enter the WeatherByCity Name!!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            q = s;
+            return true;
+        }
+    }
+
+    private boolean isValidCity() {
+        if (getCityName()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

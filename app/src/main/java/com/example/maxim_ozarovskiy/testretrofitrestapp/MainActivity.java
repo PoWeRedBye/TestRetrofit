@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.example.maxim_ozarovskiy.testretrofitrestapp.Activities.ComboActivity;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.Network.RESTClient;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherByCityModel;
 
