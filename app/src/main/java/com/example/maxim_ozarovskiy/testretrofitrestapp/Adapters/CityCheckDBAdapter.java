@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,29 +110,29 @@ public class CityCheckDBAdapter {
         mDb.delete(MyFieldDB.SQLITE_TABLE, MyFieldDB.ROWID + " = " + id, null);
     }
 
-    public List<CityCheck> getDataFromDB() {
-        List<CityCheck> cityCheckList = new ArrayList<CityCheck>();
+    public List<CityModel> getDataFromDB() {
+        List<CityModel> cityModelList = new ArrayList<CityModel>();
         String query = "select * from " + MyFieldDB.SQLITE_TABLE;
         mDb = mDbHelper.getWritableDatabase();
         Cursor cursor = mDb.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {
             do {
-                CityCheck cityCheck = new CityCheck();
-                cityCheck.setId(cursor.getString(0));
-                cityCheck.setCityCheckName(cursor.getString(1));
+                CityModel cityModel = new CityModel();
+                cityModel.setId(cursor.getString(0));
+                cityModel.setCityName(cursor.getString(1));
 
 
-                cityCheckList.add(cityCheck);
+                cityModelList.add(cityModel);
 
             } while (cursor.moveToNext());
         }
 
 
-        Log.d("city check data", cityCheckList.toString());
+        Log.d("city check data", cityModelList.toString());
 
 
-        return cityCheckList;
+        return cityModelList;
     }
 
 }

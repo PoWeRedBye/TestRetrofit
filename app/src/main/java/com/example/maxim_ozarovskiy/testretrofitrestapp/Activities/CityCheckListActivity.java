@@ -14,9 +14,8 @@ import android.widget.Toast;
 import com.daimajia.swipe.util.Attributes;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters.CityCheckDBAdapter;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters.CityCheckListAdapter;
-import com.example.maxim_ozarovskiy.testretrofitrestapp.MainActivity;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityModel;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.util.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -24,10 +23,10 @@ import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator;
 
-public class CityCheckListActivity extends AppCompatActivity implements CityCheckListAdapter.ItemCityClickListener<CityCheck>, CityCheckListAdapter.DeleteCityClickListener<CityCheck> {
+public class CityCheckListActivity extends AppCompatActivity implements CityCheckListAdapter.ItemCityClickListener<CityModel>, CityCheckListAdapter.DeleteCityClickListener<CityModel> {
 
     private CityCheckDBAdapter dbAdapter;
-    private List<CityCheck> cityCheckList;
+    private List<CityModel> cityModelList;
     private RecyclerView recyclerView;
     private CityCheckListAdapter cityCheckListAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -43,10 +42,10 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
 
         dbAdapter = new CityCheckDBAdapter(this);
         dbAdapter.open();
-        cityCheckList = new ArrayList<CityCheck>();
-        cityCheckList = dbAdapter.getDataFromDB();
+        cityModelList = new ArrayList<CityModel>();
+        cityModelList = dbAdapter.getDataFromDB();
 
-        cityCheckListAdapter = new CityCheckListAdapter(this, cityCheckList, this, this);
+        cityCheckListAdapter = new CityCheckListAdapter(this, cityModelList, this, this);
 
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -82,19 +81,19 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     }
 
     @Override
-    public void itemClick(CityCheck v, int position) {
+    public void itemClick(CityModel v, int position) {
         Intent intent = new Intent(getApplicationContext(), ComboActivity.class);
-        intent.putExtra("CityCheck", v);
+        intent.putExtra("CityModel", v);
         startActivity(intent);
     }
 
     @Override
-    public void deleteCityClick(final CityCheck v, final int position) {
+    public void deleteCityClick(final CityModel v, final int position) {
         int id = Integer.parseInt(v.getId());
         dbAdapter.delRec(id);
-        cityCheckList.remove(position);
+        cityModelList.remove(position);
         cityCheckListAdapter.notifyDataSetChanged();
-        Toast.makeText(getApplicationContext(), "WeatherByCity was deleted.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "CityInformationModel was deleted.", Toast.LENGTH_SHORT).show();
 
     }
 }

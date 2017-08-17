@@ -13,10 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters.ComboAdapter;
-import com.example.maxim_ozarovskiy.testretrofitrestapp.MainActivity;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.Network.RESTClient;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityModel;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherByCityModel;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherForDayModel;
 import com.squareup.picasso.Picasso;
@@ -69,9 +68,7 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
     private String appid = "2fa8c9a46e8ac6ad4bcc4f4fc48e5865";
     private String cnt = "7";
 
-    private CityCheck cityCheck;
-
-    public static final String sixteenDayBundleExample = "SixteenDayBundleExample";
+    private CityModel cityModel;
 
     private ComboAdapter comboAdapter;
     private RecyclerView recyclerView;
@@ -84,15 +81,10 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.combo_activity);
-
+        initUI();
         if (isValidCity()) {
             getSevenDayWeather();
         }
-
-
-        initUI();
-
-
     }
 
     private void setData() {
@@ -134,13 +126,8 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
     }
 
     private void getData() {
-        /*if (getIntent() != null && getIntent().hasExtra(sixteenDayBundleExample)) {
-            weatherByCityModel = getIntent().getParcelableExtra(sixteenDayBundleExample);
-        }*/
-
-
-        city_name = weatherByCityModel.getWeatherByCity().getName();
-        country_code = weatherByCityModel.getWeatherByCity().getCountry();
+        city_name = weatherByCityModel.getCityInformationModel().getName();
+        country_code = weatherByCityModel.getCityInformationModel().getCountry();
         curr_temp = weatherByCityModel.getWeatherForDayModelList().get(0).getTemperatureModel().getDay();
         min_temp = weatherByCityModel.getWeatherForDayModelList().get(0).getTemperatureModel().getMin();
         max_temp = weatherByCityModel.getWeatherForDayModelList().get(0).getTemperatureModel().getMax();
@@ -180,6 +167,10 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
     }
 
     //add background color for any status description!!!
+    public void getBackgroundColor(){
+
+    }
+
     public int getIcon() {
         switch (weatherImage) {
             case "01d":
@@ -265,11 +256,11 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
     }
 
     private boolean getCityName() {
-        cityCheck = getIntent().getParcelableExtra("CityCheck");
+        cityModel = getIntent().getParcelableExtra("CityModel");
 
-        String s = cityCheck.getCityCheckName();
+        String s = cityModel.getCityName();
         if (TextUtils.isEmpty(s)) {
-            Toast.makeText(getApplicationContext(), "Please enter the WeatherByCity Name!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please enter the CityInformationModel Name!!", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             q = s;

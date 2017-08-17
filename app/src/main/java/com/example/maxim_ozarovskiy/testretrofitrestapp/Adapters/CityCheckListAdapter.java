@@ -14,7 +14,7 @@ import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
-import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityCheck;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityModel;
 
 import java.util.List;
 
@@ -25,17 +25,17 @@ import java.util.List;
 public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdapter.ViewHolder> {
 
     private Context context;
-    private List<CityCheck> cityCheckList;
-    private ItemCityClickListener<CityCheck> itemCityClickListener;
+    private List<CityModel> cityModelList;
+    private ItemCityClickListener<CityModel> itemCityClickListener;
     private CityCheckDBAdapter myDb;
-    private DeleteCityClickListener<CityCheck> deleteCityClickListener;
+    private DeleteCityClickListener<CityModel> deleteCityClickListener;
 
 
-    public CityCheckListAdapter(Context context, List<CityCheck> cityCheckList,
-                                ItemCityClickListener<CityCheck> itemCityClickListener,
-                                DeleteCityClickListener<CityCheck> deleteCityClickListener) {
+    public CityCheckListAdapter(Context context, List<CityModel> cityModelList,
+                                ItemCityClickListener<CityModel> itemCityClickListener,
+                                DeleteCityClickListener<CityModel> deleteCityClickListener) {
         this.context = context;
-        this.cityCheckList = cityCheckList;
+        this.cityModelList = cityModelList;
         this.itemCityClickListener = itemCityClickListener;
         this.deleteCityClickListener = deleteCityClickListener;
     }
@@ -59,12 +59,12 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
             }
         });
 
-        holder.cityName.setText(cityCheckList.get(pos).getCityCheckName());
+        holder.cityName.setText(cityModelList.get(pos).getCityName());
 
         holder.trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteCityClickListener.deleteCityClick(cityCheckList.get(pos), pos);
+                deleteCityClickListener.deleteCityClick(cityModelList.get(pos), pos);
                 mItemManger.removeShownLayouts(holder.swipeLayout);
             }
         });
@@ -72,7 +72,7 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
         holder.cityName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemCityClickListener.itemClick(cityCheckList.get(pos), pos);
+                itemCityClickListener.itemClick(cityModelList.get(pos), pos);
             }
         });
 
@@ -80,7 +80,7 @@ public class CityCheckListAdapter extends RecyclerSwipeAdapter<CityCheckListAdap
 
     @Override
     public int getItemCount() {
-        return cityCheckList.size();
+        return cityModelList.size();
     }
 
     @Override

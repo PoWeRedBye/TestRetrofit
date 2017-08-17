@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class WeatherByCityModel implements Parcelable {
 
-    @SerializedName("weatherByCity")
+    @SerializedName("city")
     @Expose
-    private WeatherByCity weatherByCity;
+    private CityInformationModel cityInformationModel;
     @SerializedName("cod")
     @Expose
     private String cod;
@@ -22,7 +22,7 @@ public class WeatherByCityModel implements Parcelable {
     @SerializedName("cnt")
     @Expose
     private Integer cnt;
-    @SerializedName("weatherForDayModelList")
+    @SerializedName("list")
     @Expose
     private ArrayList<WeatherForDayModel> weatherForDayModelList;
 
@@ -34,12 +34,12 @@ public class WeatherByCityModel implements Parcelable {
         this.weatherForDayModelList = weatherForDayModelList;
     }
 
-    public WeatherByCity getWeatherByCity() {
-        return weatherByCity;
+    public CityInformationModel getCityInformationModel() {
+        return cityInformationModel;
     }
 
-    public void setWeatherByCity(WeatherByCity weatherByCity) {
-        this.weatherByCity = weatherByCity;
+    public void setCityInformationModel(CityInformationModel cityInformationModel) {
+        this.cityInformationModel = cityInformationModel;
     }
 
     public String getCod() {
@@ -73,7 +73,7 @@ public class WeatherByCityModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.weatherByCity, flags);
+        dest.writeParcelable(this.cityInformationModel, flags);
         dest.writeString(this.cod);
         dest.writeValue(this.message);
         dest.writeValue(this.cnt);
@@ -84,7 +84,7 @@ public class WeatherByCityModel implements Parcelable {
     }
 
     protected WeatherByCityModel(Parcel in) {
-        this.weatherByCity = in.readParcelable(WeatherByCity.class.getClassLoader());
+        this.cityInformationModel = in.readParcelable(CityInformationModel.class.getClassLoader());
         this.cod = in.readString();
         this.message = (Double) in.readValue(Double.class.getClassLoader());
         this.cnt = (Integer) in.readValue(Integer.class.getClassLoader());

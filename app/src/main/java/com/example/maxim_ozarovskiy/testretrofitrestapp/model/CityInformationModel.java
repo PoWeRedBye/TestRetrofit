@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class WeatherByCity implements Parcelable {
+public class CityInformationModel implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -14,7 +14,7 @@ public class WeatherByCity implements Parcelable {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("weatherCoordinateModel")
+    @SerializedName("coord")
     @Expose
     private WeatherCoordinateModel weatherCoordinateModel;
     @SerializedName("country")
@@ -23,14 +23,14 @@ public class WeatherByCity implements Parcelable {
     @SerializedName("population")
     @Expose
     private Integer population;
-    public final static Parcelable.Creator<WeatherByCity> CREATOR = new Creator<WeatherByCity>() {
+    public final static Parcelable.Creator<CityInformationModel> CREATOR = new Creator<CityInformationModel>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public WeatherByCity createFromParcel(Parcel in) {
-            WeatherByCity instance = new WeatherByCity();
+        public CityInformationModel createFromParcel(Parcel in) {
+            CityInformationModel instance = new CityInformationModel();
             instance.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
             instance.name = ((String) in.readValue((String.class.getClassLoader())));
             instance.weatherCoordinateModel = ((WeatherCoordinateModel) in.readValue((WeatherCoordinateModel.class.getClassLoader())));
@@ -39,8 +39,8 @@ public class WeatherByCity implements Parcelable {
             return instance;
         }
 
-        public WeatherByCity[] newArray(int size) {
-            return (new WeatherByCity[size]);
+        public CityInformationModel[] newArray(int size) {
+            return (new CityInformationModel[size]);
         }
 
     };

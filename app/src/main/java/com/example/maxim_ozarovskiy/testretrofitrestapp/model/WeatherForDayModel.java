@@ -14,7 +14,7 @@ public class WeatherForDayModel implements Parcelable {
     @SerializedName("dt")
     @Expose
     private Integer dt;
-    @SerializedName("temperatureModel")
+    @SerializedName("temp")
     @Expose
     private TemperatureModel temperatureModel;
     @SerializedName("pressure")
@@ -23,7 +23,7 @@ public class WeatherForDayModel implements Parcelable {
     @SerializedName("humidity")
     @Expose
     private Integer humidity;
-    @SerializedName("weatherDescriptionModel")
+    @SerializedName("weather")
     @Expose
     private ArrayList<WeatherDescriptionModel> weatherDescriptionModel;
     @SerializedName("speed")
