@@ -18,7 +18,7 @@ import java.util.Date;
 
 public class WeatherDetailsActivity extends AppCompatActivity {
 
-    TextView data_details;
+    TextView date_details;
     TextView temp_day_details;
     TextView temp_night_details;
     TextView directon_details;
@@ -37,6 +37,7 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
     private double tempDayCels;
     private double tempNightCels;
+    private double pressure;
 
     private double degree;
     private String direction;
@@ -58,7 +59,7 @@ public class WeatherDetailsActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        data_details = (TextView) findViewById(R.id.date_text_detail);
+        date_details = (TextView) findViewById(R.id.date_text_detail);
         temp_day_details = (TextView) findViewById(R.id.temp_day_text_detail);
         temp_night_details = (TextView) findViewById(R.id.temp_night_text_detail);
         directon_details = (TextView) findViewById(R.id.weather_direction_text);
@@ -72,12 +73,13 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
         int dayTemp = (int) tempDayCels;
         int nightTemp = (int) tempNightCels;
+        int pressureText = (int) pressure;
 
-        data_details.setText(formattedDate);
+        date_details.setText(formattedDate);
         temp_day_details.setText(String.valueOf(dayTemp) + "°C");
         temp_night_details.setText(String.valueOf(nightTemp) + "°C");
         humidity_details.setText(String.valueOf(humid));
-        pressure_details.setText(String.valueOf(press) + " hPa");
+        pressure_details.setText(String.valueOf(pressureText));//v mm rt.st.
         getDirection();
         directon_details.setText(direction);
         weather_status_text_details.setText(status);
@@ -85,9 +87,11 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         Picasso.with(getApplicationContext()).load(weather_image).into(weather_status_icon_details);
     }
 
+    //delete this methods from all Activities......
     private void calcData() {
-        tempDayCels = tempDay - 273;
-        tempNightCels = tempNight - 273;
+        pressure = press / 1.333224;
+        tempDayCels = tempDay;
+        tempNightCels = tempNight;
     }
 
     private void getData() {
@@ -104,7 +108,7 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         press = list.getPressure();
         wind_degree = list.getDeg();
         weatherImage = list.getWeatherDescriptionModel().get(0).getIcon();
-        status = list.getWeatherDescriptionModel().get(0).getMain();
+        status = list.getWeatherDescriptionModel().get(0).getDescription();
     }
 
     private void getDirection() {

@@ -15,5 +15,7 @@ public interface SevenDayWeatherService {
     @GET("data/2.5/forecast/daily")
     Call<WeatherByCityModel> getWeatherExample(@Query("q") String q,
                                                @Query("appid") String appid,
-                                               @Query("cnt") String cnt);
+                                               @Query("cnt") String cnt,
+                                               @Query("units") String units,
+                                               @Query("lang") String lang);
 }

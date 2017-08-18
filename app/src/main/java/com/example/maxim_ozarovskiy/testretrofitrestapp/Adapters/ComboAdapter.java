@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
@@ -33,8 +34,6 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
 
     private double tempDayCels;
     private double tempNightCels;
-    private Double dayKelvin;
-    private Double nightKelvin;
     private int dayCels;
     private int nightCels;
 
@@ -47,7 +46,7 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
 
     @Override
     public ComboAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.weather_per_day_item, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.weather_per_day_item_1, null);
         ViewHolder holder = new ViewHolder(v);
         return holder;
     }
@@ -57,26 +56,24 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
 
         date = list.get(position).getDt();
         Date time = new Date();
-        time.setTime(date*1000);
+        time.setTime(date * 1000);
         SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy");
         String formattedDate = format.format(time);
 
-        dayKelvin = list.get(position).getTemperatureModel().getDay();
-        tempDayCels = dayKelvin - 273;
+        tempDayCels = list.get(position).getTemperatureModel().getDay();
         dayCels = (int) tempDayCels;
 
-        nightKelvin = list.get(position).getTemperatureModel().getNight();
-        tempNightCels = nightKelvin - 273;
-        nightCels =(int) tempNightCels;
+        tempNightCels = list.get(position).getTemperatureModel().getNight();
+        nightCels = (int) tempNightCels;
 
         holder.data_card.setText(formattedDate);
-        holder.temp_night_card.setText(String.valueOf(nightCels)+ "°C");
-        holder.temp_day_card.setText(String.valueOf(dayCels)+ "°C");
+        holder.temp_night_card.setText(String.valueOf(nightCels) + "°C");
+        holder.temp_day_card.setText(String.valueOf(dayCels) + "°C");
         weatherImage = list.get(position).getWeatherDescriptionModel().get(0).getIcon();
         weather_image = getIcon();
         Picasso.with(context).load(weather_image).into(holder.w_status_card);
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 itemListener.ItemClick(list.get(position), position);
@@ -90,7 +87,7 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        CardView cardView;
+        RelativeLayout relativeLayout;
         ImageView w_status_card;
         TextView temp_day_card;
         TextView temp_night_card;
@@ -98,11 +95,11 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
 
         public ViewHolder(View v) {
             super(v);
-            cardView = (CardView) v.findViewById(R.id.card_1);
-            w_status_card = (ImageView) v.findViewById(R.id.weather_status_card_1);
-            temp_day_card = (TextView) v.findViewById(R.id.text_temp_day_card_1);
-            temp_night_card = (TextView) v.findViewById(R.id.text_temp_niht_card_1);
-            data_card = (TextView) v.findViewById(R.id.date_card_1);
+            relativeLayout = (RelativeLayout) v.findViewById(R.id.relative_weather_per_day_item_cube);
+            w_status_card = (ImageView) v.findViewById(R.id.weather_status_icon_item_cube);
+            temp_day_card = (TextView) v.findViewById(R.id.max_temp_per_day_item);
+            temp_night_card = (TextView) v.findViewById(R.id.min_temp_per_day_item);
+            data_card = (TextView) v.findViewById(R.id.date_info_item_cube);
         }
     }
 

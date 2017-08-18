@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weather_info_activity_relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_light"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/weather_info_activity_city_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:text="KHARKIV"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/weather_info_activity_country_code_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/weather_info_activity_city_name_text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/weather_info_activity_city_name_text"
+        android:layout_toRightOf="@+id/weather_info_activity_city_name_text"
+        android:text="UA"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/weather_info_activity_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/weather_info_activity_status_icon"
+        android:layout_alignLeft="@+id/weather_info_activity_city_name_text"
+        android:layout_alignStart="@+id/weather_info_activity_city_name_text"
+        android:text="СЕГОДНЯ:"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/weather_info_activity_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/weather_info_activity_city_name_text"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="9dp"
+        android:layout_toEndOf="@+id/weather_info_activity_date"
+        android:layout_toRightOf="@+id/weather_info_activity_date"
+        android:text="textView"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/weather_info_activity_status_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/weather_info_activity_city_name_text"
+        android:layout_alignStart="@+id/weather_info_activity_city_name_text"
+        android:layout_below="@+id/weather_info_activity_date_text"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/one_day" />
+
+    <TextView
+        android:id="@+id/weather_info_activity_current_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/weather_info_activity_status_icon"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/weather_info_activity_status_icon"
+        android:layout_toRightOf="@+id/weather_info_activity_status_icon"
+        android:text="35'C"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/weather_activity_info_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/weather_info_activity_current_temperature"
+        android:layout_alignStart="@+id/weather_info_activity_current_temperature"
+        android:layout_below="@+id/weather_info_activity_current_temperature"
+        android:layout_marginTop="10dp"
+        android:text="ВЛАЖНОСТЬ:"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/weather_info_activity_humidity_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/weather_activity_info_humidity"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/weather_activity_info_humidity"
+        android:layout_toRightOf="@+id/weather_activity_info_humidity"
+        android:text="78%"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/weather_info_activity_wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/weather_activity_info_humidity"
+        android:layout_alignStart="@+id/weather_activity_info_humidity"
+        android:layout_below="@+id/weather_activity_info_humidity"
+        android:layout_marginTop="10dp"
+        android:text="ВЕТЕР:"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/weather_info_activity_wind_speed_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/weather_info_activity_pressure"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/weather_info_activity_wind"
+        android:layout_toRightOf="@+id/weather_info_activity_wind"
+        android:text="20 М/С"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/weather_info_activity_wind_direction_icon"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@+id/weather_info_activity_wind_speed_text"
+        android:layout_alignEnd="@+id/weather_info_activity_humidity_text"
+        android:layout_alignRight="@+id/weather_info_activity_humidity_text"
+        android:layout_alignTop="@+id/weather_info_activity_wind_speed_text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toRightOf="@+id/weather_info_activity_wind_speed_text"
+        app:srcCompat="@drawable/north_east" />
+
+    <TextView
+        android:id="@+id/weather_info_activity_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/weather_info_activity_wind"
+        android:layout_alignStart="@+id/weather_info_activity_wind"
+        android:layout_below="@+id/weather_info_activity_wind"
+        android:layout_marginTop="9dp"
+        android:text="ДАВЛЕНИЕ:"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/weather_info_activity_pressure_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/weather_info_activity_pressure"
+        android:layout_alignBottom="@+id/weather_info_activity_pressure"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/weather_info_activity_pressure"
+        android:layout_toRightOf="@+id/weather_info_activity_pressure"
+        android:text="9999"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/weather_info_activiti_pressure_parameter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/weather_info_activity_pressure_text"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/weather_info_activity_pressure_text"
+        android:layout_toRightOf="@+id/weather_info_activity_pressure_text"
+        android:text="мм рт.ст."
+        android:textColor="@android:color/background_light"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/weather_info_activity_weather_status_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/weather_info_activity_pressure"
+        android:layout_alignStart="@+id/weather_info_activity_pressure"
+        android:layout_below="@+id/weather_info_activity_pressure"
+        android:layout_marginTop="10dp"
+        android:text="СОЛНЕЧНО"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/weather_info_activity_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/weather_info_activity_weather_status_description"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/weather_info_activity_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/weather_info_activity_weather_status_description"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal" />
+    </LinearLayout>
+
+</RelativeLayout>
