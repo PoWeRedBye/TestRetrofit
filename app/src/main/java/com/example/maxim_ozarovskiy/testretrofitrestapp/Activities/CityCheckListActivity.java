@@ -60,7 +60,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
         addCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), NewCityActivity.class);
+                Intent intent = new Intent(getApplicationContext(), NewCityAddActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,7 +74,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     }
 
     private void initUI() {
-        setTitle("My WeatherDescriptionModel App");
+        setTitle("My Weather");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.city_check_recycler);
         addCity = (FloatingActionButton) findViewById(R.id.fab);
@@ -82,7 +82,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
 
     @Override
     public void itemClick(CityModel v, int position) {
-        Intent intent = new Intent(getApplicationContext(), ComboActivity.class);
+        Intent intent = new Intent(getApplicationContext(), WeatherInfoActivity.class);
         intent.putExtra("CityModel", v);
         startActivity(intent);
     }
@@ -93,7 +93,7 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
         dbAdapter.delRec(id);
         cityModelList.remove(position);
         cityCheckListAdapter.notifyDataSetChanged();
-        Toast.makeText(getApplicationContext(), "CityInformationModel was deleted.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.city_deleted, Toast.LENGTH_SHORT).show();
 
     }
 }

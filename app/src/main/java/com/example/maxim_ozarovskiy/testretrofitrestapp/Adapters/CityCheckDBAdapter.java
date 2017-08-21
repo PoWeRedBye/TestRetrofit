@@ -94,17 +94,6 @@ public class CityCheckDBAdapter {
         return mDb.insert(MyFieldDB.SQLITE_TABLE, null, initialValues);
     }
 
-    public long updateCityField(int id, String city_name) {
-        try {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(MyFieldDB.CITY_NAME, city_name);
-
-            return mDb.update(MyFieldDB.SQLITE_TABLE, contentValues, MyFieldDB.ROWID + " =?", new String[]{String.valueOf(id)});
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
 
     public void delRec(long id) {
         mDb.delete(MyFieldDB.SQLITE_TABLE, MyFieldDB.ROWID + " = " + id, null);

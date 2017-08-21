@@ -1,7 +1,12 @@
 <resources>
-    <string name="app_name">My Weather App</string>
-    <string name="sorry_bad_city">Sorry man! Please enter a correct cityInformationModel name</string>
+    <string name="app_name">My Weather</string>
+    <string name="sorry_bad_city">Sorry man! Please enter a correct city name</string>
     <string name="no_inet">No inet</string>
-    <string name="title_activity_city_check_list">My Weather App</string>
+    <string name="city_deleted">City was deleted</string>
+    <string name="title_activity_city_check_list">My Weather</string>
     <string name="celsius">°C</string>
+    <string name="gradus">°</string>
+    <string name="new_city_added">You added a new city</string>
+    <string name="new_city_is_not_added">New city is not added!!!</string>
+    <string name="enter_new_city_name">Enter the name of the new city!!!</string>
 </resources>

@@ -23,13 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.ComboActivity"></activity>
-        <activity android:name=".Activities.WeatherDetailsActivity">
-
-        </activity>
-        <activity android:name=".Activities.NewCityActivity">
-
-        </activity>
+        <activity android:name=".Activities.WeatherInfoActivity" />
+        <activity android:name=".Activities.NewCityAddActivity" />
         <activity
             android:name=".Activities.CityCheckListActivity"
             android:label="@string/title_activity_city_check_list"

@@ -1,80 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="5dp"
-    card_view:cardBackgroundColor="@android:color/white"
-    card_view:cardCornerRadius="25dp"
-    card_view:cardElevation="15dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_weather_per_day_item_cube"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:background="@android:color/holo_orange_light"
+    android:padding="15dp"
+    android:paddingBottom="15dp"
+    android:paddingEnd="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingStart="15dp"
+    android:paddingTop="15dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
+    <TextView
+        android:id="@+id/date_info_item_cube"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="сб, 26 авг. 2017"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/weather_status_card_1"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+    <ImageView
+        android:id="@+id/weather_status_icon_item_cube"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/date_info_item_cube"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:cropToPadding="false"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/one_day" />
 
-        <ImageView
-            android:id="@+id/temp_day_card_1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/date_card_1"
-            android:layout_toLeftOf="@+id/text_temp_niht_card_1"
-            android:layout_toStartOf="@+id/text_temp_niht_card_1"
-            android:background="@drawable/temp_day_icon" />
+    <TextView
+        android:id="@+id/max_temp_per_day_item"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/date_info_item_cube"
+        android:layout_alignStart="@+id/date_info_item_cube"
+        android:layout_below="@+id/weather_status_icon_item_cube"
+        android:layout_marginTop="7dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/temp_niht_card_1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/date_card_1"
-            android:layout_marginEnd="3dp"
-            android:layout_marginRight="3dp"
-            android:background="@drawable/temp_night_icon" />
+    <TextView
+        android:id="@+id/min_temp_per_day_item"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_item_min"
+        android:layout_alignEnd="@+id/date_info_item_cube"
+        android:layout_alignRight="@+id/date_info_item_cube"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/date_card_1"
-            android:layout_width="230dp"
-            android:layout_height="35dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/weather_status_card_1"
-            android:textAlignment="center"
-            android:textSize="30sp" />
+    <TextView
+        android:id="@+id/text_item_max"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/max_temp_per_day_item"
+        android:layout_alignLeft="@+id/max_temp_per_day_item"
+        android:layout_alignRight="@+id/max_temp_per_day_item"
+        android:layout_alignStart="@+id/max_temp_per_day_item"
+        android:layout_below="@+id/max_temp_per_day_item"
+        android:paddingTop="5dp"
+        android:text="Макс."
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/text_temp_day_card_1"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignBottom="@+id/temp_day_card_1"
-            android:layout_toLeftOf="@+id/temp_day_card_1"
-            android:layout_toStartOf="@+id/temp_day_card_1"
-            android:text="25 'C"
-            android:textAlignment="center"
-            android:textSize="25sp" />
+    <TextView
+        android:id="@+id/text_item_min"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_item_max"
+        android:layout_alignBottom="@+id/text_item_max"
+        android:layout_alignEnd="@+id/min_temp_per_day_item"
+        android:layout_alignLeft="@+id/min_temp_per_day_item"
+        android:layout_alignRight="@+id/min_temp_per_day_item"
+        android:layout_alignStart="@+id/min_temp_per_day_item"
+        android:paddingTop="5dp"
+        android:text="Мин."
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light" />
 
-        <TextView
-            android:id="@+id/text_temp_niht_card_1"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignBottom="@+id/temp_niht_card_1"
-            android:layout_toLeftOf="@+id/temp_niht_card_1"
-            android:layout_toStartOf="@+id/temp_niht_card_1"
-            android:text="25 'C"
-            android:textAlignment="center"
-            android:textSize="25sp" />
-
-
-    </RelativeLayout>
-
-
-</android.support.v7.widget.CardView>
+</RelativeLayout>

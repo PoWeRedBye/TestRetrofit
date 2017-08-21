@@ -1,7 +1,6 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,7 @@ import java.util.List;
  * Created by Maxim_Ozarovskiy on 16.07.2017.
  */
 
-public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> {
+public class WeatherInfoActivityAdapter extends RecyclerView.Adapter<WeatherInfoActivityAdapter.ViewHolder> {
 
     private String weatherImage;
     private int weather_image;
@@ -37,7 +36,7 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
     private int dayCels;
     private int nightCels;
 
-    public ComboAdapter(Context context, List<WeatherForDayModel> list, ItemClickListener<WeatherForDayModel> itemListener) {
+    public WeatherInfoActivityAdapter(Context context, List<WeatherForDayModel> list, ItemClickListener<WeatherForDayModel> itemListener) {
         this.context = context;
         this.list = list;
         this.itemListener = itemListener;
@@ -45,14 +44,14 @@ public class ComboAdapter extends RecyclerView.Adapter<ComboAdapter.ViewHolder> 
     }
 
     @Override
-    public ComboAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.weather_per_day_item_1, null);
+    public WeatherInfoActivityAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.weather_per_day_item, null);
         ViewHolder holder = new ViewHolder(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ComboAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(WeatherInfoActivityAdapter.ViewHolder holder, final int position) {
 
         date = list.get(position).getDt();
         Date time = new Date();

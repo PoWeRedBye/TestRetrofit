@@ -18,7 +18,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
-        android:text="KHARKIV"
+        android:textAllCaps="true"
         android:textColor="@android:color/background_light"
         android:textSize="24sp" />
 
@@ -31,8 +31,8 @@
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/weather_info_activity_city_name_text"
         android:layout_toRightOf="@+id/weather_info_activity_city_name_text"
-        android:text="UA"
         android:textAlignment="center"
+        android:textAllCaps="true"
         android:textColor="@android:color/background_light"
         android:textSize="24sp" />
 
@@ -57,7 +57,6 @@
         android:layout_marginTop="9dp"
         android:layout_toEndOf="@+id/weather_info_activity_date"
         android:layout_toRightOf="@+id/weather_info_activity_date"
-        android:text="textView"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
@@ -81,7 +80,6 @@
         android:layout_marginStart="25dp"
         android:layout_toEndOf="@+id/weather_info_activity_status_icon"
         android:layout_toRightOf="@+id/weather_info_activity_status_icon"
-        android:text="35'C"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="24sp" />
@@ -108,7 +106,6 @@
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/weather_activity_info_humidity"
         android:layout_toRightOf="@+id/weather_activity_info_humidity"
-        android:text="78%"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
@@ -135,22 +132,20 @@
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/weather_info_activity_wind"
         android:layout_toRightOf="@+id/weather_info_activity_wind"
-        android:text="20 М/С"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/weather_info_activity_wind_direction_icon"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/north_east"
         android:layout_alignBottom="@+id/weather_info_activity_wind_speed_text"
-        android:layout_alignEnd="@+id/weather_info_activity_humidity_text"
-        android:layout_alignRight="@+id/weather_info_activity_humidity_text"
-        android:layout_alignTop="@+id/weather_info_activity_wind_speed_text"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
         android:layout_toRightOf="@+id/weather_info_activity_wind_speed_text"
-        app:srcCompat="@drawable/north_east" />
+        android:layout_toEndOf="@+id/weather_info_activity_wind_speed_text"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp" />
 
     <TextView
         android:id="@+id/weather_info_activity_pressure"
@@ -175,7 +170,6 @@
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/weather_info_activity_pressure"
         android:layout_toRightOf="@+id/weather_info_activity_pressure"
-        android:text="9999"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 
@@ -200,6 +194,7 @@
         android:layout_alignStart="@+id/weather_info_activity_pressure"
         android:layout_below="@+id/weather_info_activity_pressure"
         android:layout_marginTop="10dp"
+        android:textAllCaps="true"
         android:text="СОЛНЕЧНО"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
@@ -208,18 +203,42 @@
     <LinearLayout
         android:id="@+id/weather_info_activity_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_below="@+id/weather_info_activity_weather_status_description"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/weather_info_activity_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/weather_info_activity_weather_status_description"
             android:orientation="horizontal"
             android:scrollbars="horizontal" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Special to"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp"
+        android:layout_above="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/logo_doc"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="17dp" />
 
 </RelativeLayout>

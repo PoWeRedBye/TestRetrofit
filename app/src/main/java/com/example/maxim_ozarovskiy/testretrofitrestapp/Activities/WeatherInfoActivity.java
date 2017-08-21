@@ -1,6 +1,5 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,11 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters.ComboAdapter;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters.WeatherInfoActivityAdapter;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.Network.RESTClient;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityModel;
@@ -32,25 +32,21 @@ import retrofit2.Response;
  * Created by Maxim_Ozarovskiy on 16.07.2017.
  */
 
-public class ComboActivity extends AppCompatActivity implements ComboAdapter.ItemClickListener<WeatherForDayModel> {
+public class WeatherInfoActivity extends AppCompatActivity implements WeatherInfoActivityAdapter.ItemClickListener<WeatherForDayModel> {
 
     TextView cityName;
     TextView currentTemp;
-    TextView minTemp;
-    TextView maxTemp;
     TextView humidity;
     TextView pressure;
     TextView windSpeed;
     ImageView windDegree;
     TextView countryCode;
-    ImageView weather_status_icon;
+    ImageView weatherStatusIcon;
     TextView weatherDescription;
-    TextView date_info;
+    TextView dateInfo;
 
     private String city_name;
     private Double curr_temp;
-    private Double min_temp;
-    private Double max_temp;
     private Integer humid;
     private Double press;
     private Double wind_speed;
@@ -60,14 +56,8 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
 
     private long date;
     private double tempCels;
-    private double tempMaxCels;
-    private double tempMinCels;
-    private String deg1;
-    private String speed1;
     private double pressure1;
 
-    private double degree;
-    private String direction;
     private String weatherImage;
     private int weather_image;
     private int wind_direction;
@@ -81,17 +71,24 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
 
     private CityModel cityModel;
 
-    private ComboAdapter comboAdapter;
+    private WeatherInfoActivityAdapter weatherInfoActivityAdapter;
     private RecyclerView recyclerView;
     private List<WeatherForDayModel> weatherForDayList;
     private WeatherByCityModel weatherByCityModel;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager;
     private RelativeLayout relativeLayout;
+    private LinearLayout linearLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_info_activity);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         initUI();
         if (isValidCity()) {
             getSevenDayWeather();
@@ -106,16 +103,15 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         cityName.setText(city_name);
         countryCode.setText(country_code);
         currentTemp.setText(String.valueOf(currTemp) + "°C");
-        humidity.setText(String.valueOf(humid));
+        humidity.setText(String.valueOf(humid) + "%");
         pressure.setText(String.valueOf(pressureText));
-        windSpeed.setText(String.valueOf(wind_speed) + " m/s");
+        windSpeed.setText(String.valueOf(wind_speed) + " М/С");
         weatherDescription.setText(weather_description);
-        date_info.setText(formattedDate);
-        getDirection();
-        wind_direction = getDirectionIcon();
+        dateInfo.setText(formattedDate);
+        wind_direction = getDirection();
         Picasso.with(getApplicationContext()).load(wind_direction).into(windDegree);
         weather_image = getIcon();
-        Picasso.with(getApplicationContext()).load(weather_image).into(weather_status_icon);
+        Picasso.with(getApplicationContext()).load(weather_image).into(weatherStatusIcon);
     }
 
     private void initUI() {
@@ -125,11 +121,14 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         humidity = (TextView) findViewById(R.id.weather_info_activity_humidity_text);
         pressure = (TextView) findViewById(R.id.weather_info_activity_pressure_text);
         windSpeed = (TextView) findViewById(R.id.weather_info_activity_wind_speed_text);
-        windDegree = (ImageView) findViewById(R.id.weather_info_activity_wind_direction_icon);
+        dateInfo = (TextView) findViewById(R.id.weather_info_activity_date_text);
         countryCode = (TextView) findViewById(R.id.weather_info_activity_country_code_text);
         weatherDescription = (TextView) findViewById(R.id.weather_info_activity_weather_status_description);
-        weather_status_icon = (ImageView) findViewById(R.id.weather_info_activity_status_icon);
-        date_info = (TextView) findViewById(R.id.weather_info_activity_date_text);
+
+        windDegree = (ImageView) findViewById(R.id.weather_info_activity_wind_direction_icon);
+        weatherStatusIcon = (ImageView) findViewById(R.id.weather_info_activity_status_icon);
+
+        linearLayout = (LinearLayout) findViewById(R.id.weather_info_activity_linear_layout);
         recyclerView = (RecyclerView) findViewById(R.id.weather_info_activity_recycler_view);
         relativeLayout = (RelativeLayout) findViewById(R.id.weather_info_activity_relative_layout);
     }
@@ -153,58 +152,30 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         weather_description = weatherByCityModel.getWeatherForDayModelList().get(0).getWeatherDescriptionModel().get(0).getDescription();
     }
 
-    private void getDirection() {
-        direction = "Unknown";
+    private int getDirection() {
         if (wind_degree >= 337.5 || wind_degree < 22.5) {
-            direction = "North";
+            wind_direction = R.drawable.north;
         } else if (wind_degree >= 22.5 && wind_degree < 67.5) {
-            direction = "North-East";
+            wind_direction = R.drawable.north_east;
         } else if (wind_degree >= 67.5 && wind_degree < 112.5) {
-            direction = "East";
+            wind_direction = R.drawable.east;
         } else if (wind_degree >= 112.5 && wind_degree < 157.5) {
-            direction = "South-East";
+            wind_direction = R.drawable.south_east;
         } else if (wind_degree >= 157.5 && wind_degree < 202.5) {
-            direction = "South";
+            wind_direction = R.drawable.south;
         } else if (wind_degree >= 202.5 && wind_degree < 247.5) {
-            direction = "South-West";
+            wind_direction = R.drawable.south_west;
         } else if (wind_degree >= 247.5 && wind_degree < 292.5) {
-            direction = "West";
+            wind_direction = R.drawable.west;
         } else if (wind_degree >= 292.5 || wind_degree < 22.5) {
-            direction = "North-West";
+            wind_direction = R.drawable.north_west;
         }
+        return wind_direction;
     }
 
     private void calcData() {
         pressure1 = press / 1.333224;
         tempCels = curr_temp;
-        weather_description.toUpperCase();
-    }
-
-    //add background color for any status description!!!
-    public void getBackgroundColor() {
-
-    }
-
-    public int getDirectionIcon(){
-        switch (direction){
-            case "North":
-                return R.drawable.north;
-            case "North-East":
-                return  R.drawable.north_east;
-            case "East":
-                return R.drawable.east;
-            case "South-East":
-                return R.drawable.south_east;
-            case "South":
-                return R.drawable.south;
-            case "South-West":
-                return R.drawable.south_west;
-            case "West":
-                return R.drawable.west;
-            case "North-West":
-                return R.drawable.north_west;
-        }
-        return wind_direction;
     }
 
     public int getIcon() {
@@ -251,9 +222,26 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
 
     @Override
     public void ItemClick(WeatherForDayModel v, int position) {
-        Intent intent = new Intent(getApplicationContext(), WeatherDetailsActivity.class);
-        intent.putExtra("WeatherForDayModel", v);
-        startActivity(intent);
+
+        date = weatherByCityModel.getWeatherForDayModelList().get(position).getDt();
+        Date time = new Date();
+        time.setTime(date * 1000);
+        SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy");
+        formattedDate = format.format(time);
+
+        city_name = weatherByCityModel.getCityInformationModel().getName();
+        country_code = weatherByCityModel.getCityInformationModel().getCountry();
+        curr_temp = weatherByCityModel.getWeatherForDayModelList().get(position).getTemperatureModel().getDay();
+        humid = weatherByCityModel.getWeatherForDayModelList().get(position).getHumidity();
+        press = weatherByCityModel.getWeatherForDayModelList().get(position).getPressure();
+        wind_speed = weatherByCityModel.getWeatherForDayModelList().get(position).getSpeed();
+        wind_degree = weatherByCityModel.getWeatherForDayModelList().get(position).getDeg();
+        weatherImage = weatherByCityModel.getWeatherForDayModelList().get(position).getWeatherDescriptionModel().get(0).getIcon();
+        weather_description = weatherByCityModel.getWeatherForDayModelList().get(position).getWeatherDescriptionModel().get(0).getDescription();
+
+        calcData();
+        setData();
+
     }
 
     private void getSevenDayWeather() {
@@ -265,29 +253,30 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
                     weatherByCityModel = response.body();
                     updateUI();
                 } else {
-                    Toast.makeText(ComboActivity.this, R.string.sorry_bad_city, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WeatherInfoActivity.this, R.string.sorry_bad_city, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<WeatherByCityModel> call, @NonNull Throwable t) {
-                Toast.makeText(ComboActivity.this, R.string.no_inet, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WeatherInfoActivity.this, R.string.no_inet, Toast.LENGTH_SHORT).show();
             }
 
         });
     }
 
     public void updateUI() {
+        setTitle(weatherByCityModel.getCityInformationModel().getName());
         getData();
         calcData();
         setData();
         weatherForDayList = weatherByCityModel.getWeatherForDayModelList();
-        comboAdapter = new ComboAdapter(this, weatherForDayList.subList(1, 7), this);
-        mLayoutManager = new LinearLayoutManager(this);
-        mLayoutManager.canScrollVertically();
+        weatherInfoActivityAdapter = new WeatherInfoActivityAdapter(this, weatherForDayList, this);
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(comboAdapter);
-        comboAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(weatherInfoActivityAdapter);
+        weatherInfoActivityAdapter.notifyDataSetChanged();
 
     }
 
@@ -296,7 +285,7 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
 
         String s = cityModel.getCityName();
         if (TextUtils.isEmpty(s)) {
-            Toast.makeText(getApplicationContext(), "Please enter the CityInformationModel Name!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.sorry_bad_city, Toast.LENGTH_SHORT).show();
             return false;
         } else {
             q = s;
@@ -312,4 +301,9 @@ public class ComboActivity extends AppCompatActivity implements ComboAdapter.Ite
         }
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

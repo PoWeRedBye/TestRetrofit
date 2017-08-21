@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.splash);
+        setContentView(R.layout.splash_activity);
 
         splash = (ImageView) findViewById(R.id.splash);
         Animation splashAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);

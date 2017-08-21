@@ -16,7 +16,7 @@ import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
  * Created by Maxim_Ozarovskiy on 19.07.2017.
  */
 
-public class NewCityActivity extends AppCompatActivity {
+public class NewCityAddActivity extends AppCompatActivity {
 
     EditText cityAdd;
     Button citySave;
@@ -28,7 +28,7 @@ public class NewCityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.city_add);
+        setContentView(R.layout.city_add_activity);
 
         initUI();
 
@@ -41,10 +41,10 @@ public class NewCityActivity extends AppCompatActivity {
                 cityName = cityAdd.getText().toString();
                 if (isValidData()) {
                     dbAdapter.createCityField(cityName);
-                    Toast.makeText(getApplicationContext(), "You added a CityInformationModel", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.new_city_added, Toast.LENGTH_SHORT).show();
                     returnHome();
                 } else {
-                    Toast.makeText(getApplicationContext(), "CityInformationModel is not added!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.new_city_is_not_added, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -53,7 +53,7 @@ public class NewCityActivity extends AppCompatActivity {
 
     private boolean isValidData() {
         if (TextUtils.isEmpty(cityName)) {
-            Toast.makeText(getApplicationContext(), "Please enter the CityInformationModel!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.enter_new_city_name, Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
@@ -61,7 +61,7 @@ public class NewCityActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        setTitle("CityInformationModel Add");
+        setTitle("New City Add");
         cityAdd = (EditText) findViewById(R.id.city_add_text);
         citySave = (Button) findViewById(R.id.city_add_button);
     }

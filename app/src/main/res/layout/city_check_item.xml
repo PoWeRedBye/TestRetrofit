@@ -35,8 +35,8 @@
 
         <TextView
             android:id="@+id/city_check_name_item"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:tag="Hover"
             android:textAlignment="center"
