@@ -43,7 +43,7 @@
         android:layout_above="@+id/weather_info_activity_status_icon"
         android:layout_alignLeft="@+id/weather_info_activity_city_name_text"
         android:layout_alignStart="@+id/weather_info_activity_city_name_text"
-        android:text="СЕГОДНЯ:"
+        android:text="ДАТА:"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
