@@ -1,12 +1,11 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TemperatureModel implements Parcelable {
+import io.realm.RealmObject;
+
+public class TemperatureModel {
 
     @SerializedName("day")
     @Expose
@@ -26,28 +25,6 @@ public class TemperatureModel implements Parcelable {
     @SerializedName("morn")
     @Expose
     private Double morn;
-    public final static Parcelable.Creator<TemperatureModel> CREATOR = new Creator<TemperatureModel>() {
-
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public TemperatureModel createFromParcel(Parcel in) {
-            TemperatureModel instance = new TemperatureModel();
-            instance.day = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.min = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.max = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.night = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.eve = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.morn = ((Double) in.readValue((Double.class.getClassLoader())));
-            return instance;
-        }
-
-        public TemperatureModel[] newArray(int size) {
-            return (new TemperatureModel[size]);
-        }
-
-    };
 
     public Double getDay() {
         return day;
@@ -95,19 +72,6 @@ public class TemperatureModel implements Parcelable {
 
     public void setMorn(Double morn) {
         this.morn = morn;
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(day);
-        dest.writeValue(min);
-        dest.writeValue(max);
-        dest.writeValue(night);
-        dest.writeValue(eve);
-        dest.writeValue(morn);
-    }
-
-    public int describeContents() {
-        return 0;
     }
 
 }

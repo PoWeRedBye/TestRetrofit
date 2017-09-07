@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -109,9 +110,9 @@ public class WeatherInfoActivity extends AppCompatActivity implements WeatherInf
         weatherDescription.setText(weather_description);
         dateInfo.setText(formattedDate);
         wind_direction = getDirection();
-        Picasso.with(getApplicationContext()).load(wind_direction).into(windDegree);
+        Picasso.with(this).load(wind_direction).into(windDegree);
         weather_image = getIcon();
-        Picasso.with(getApplicationContext()).load(weather_image).into(weatherStatusIcon);
+        Picasso.with(this).load(weather_image).into(weatherStatusIcon);
     }
 
     private void initUI() {
@@ -231,7 +232,9 @@ public class WeatherInfoActivity extends AppCompatActivity implements WeatherInf
 
         city_name = weatherByCityModel.getCityInformationModel().getName();
         country_code = weatherByCityModel.getCityInformationModel().getCountry();
+
         curr_temp = weatherByCityModel.getWeatherForDayModelList().get(position).getTemperatureModel().getDay();
+
         humid = weatherByCityModel.getWeatherForDayModelList().get(position).getHumidity();
         press = weatherByCityModel.getWeatherForDayModelList().get(position).getPressure();
         wind_speed = weatherByCityModel.getWeatherForDayModelList().get(position).getSpeed();
@@ -245,6 +248,7 @@ public class WeatherInfoActivity extends AppCompatActivity implements WeatherInf
     }
 
     private void getSevenDayWeather() {
+
         RESTClient.getInstance().getSevenDayWeatherExample().getWeatherExample(q, appid, cnt, units, lang).enqueue(new Callback<WeatherByCityModel>() {
 
             @Override
@@ -260,7 +264,7 @@ public class WeatherInfoActivity extends AppCompatActivity implements WeatherInf
             @Override
             public void onFailure(@NonNull Call<WeatherByCityModel> call, @NonNull Throwable t) {
                 Toast.makeText(WeatherInfoActivity.this, R.string.no_inet, Toast.LENGTH_SHORT).show();
-            }
+                }
 
         });
     }
@@ -305,5 +309,10 @@ public class WeatherInfoActivity extends AppCompatActivity implements WeatherInf
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

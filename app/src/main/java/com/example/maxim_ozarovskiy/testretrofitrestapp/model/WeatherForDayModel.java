@@ -1,15 +1,14 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import io.realm.RealmModel;
 
-public class WeatherForDayModel implements Parcelable {
+import io.realm.RealmList;
+import io.realm.RealmObject;
+
+public class WeatherForDayModel  {
 
     @SerializedName("dt")
     @Expose
@@ -122,52 +121,6 @@ public class WeatherForDayModel implements Parcelable {
         this.weatherDescriptionModel = weatherDescriptionModel;
     }
 
-
-
     public WeatherForDayModel() {
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.dt);
-        dest.writeParcelable(this.temperatureModel, flags);
-        dest.writeValue(this.pressure);
-        dest.writeValue(this.humidity);
-        dest.writeTypedList(this.weatherDescriptionModel);
-        dest.writeValue(this.speed);
-        dest.writeValue(this.deg);
-        dest.writeValue(this.clouds);
-        dest.writeValue(this.rain);
-        dest.writeValue(this.snow);
-    }
-
-    protected WeatherForDayModel(Parcel in) {
-        this.dt = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.temperatureModel = in.readParcelable(TemperatureModel.class.getClassLoader());
-        this.pressure = (Double) in.readValue(Double.class.getClassLoader());
-        this.humidity = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.weatherDescriptionModel = in.createTypedArrayList(WeatherDescriptionModel.CREATOR);
-        this.speed = (Double) in.readValue(Double.class.getClassLoader());
-        this.deg = (Double) in.readValue(Double.class.getClassLoader());
-        this.clouds = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.rain = (Double) in.readValue(Double.class.getClassLoader());
-        this.snow = (Double) in.readValue(Double.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<WeatherForDayModel> CREATOR = new Parcelable.Creator<WeatherForDayModel>() {
-        @Override
-        public WeatherForDayModel createFromParcel(Parcel source) {
-            return new WeatherForDayModel(source);
-        }
-
-        @Override
-        public WeatherForDayModel[] newArray(int size) {
-            return new WeatherForDayModel[size];
-        }
-    };
 }

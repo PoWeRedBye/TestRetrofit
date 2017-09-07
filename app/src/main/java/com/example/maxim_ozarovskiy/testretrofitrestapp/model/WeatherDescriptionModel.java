@@ -1,14 +1,11 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import io.realm.RealmModel;
+import io.realm.RealmObject;
 
-public class WeatherDescriptionModel implements Parcelable {
+public class WeatherDescriptionModel {
 
     @SerializedName("id")
     @Expose
@@ -22,26 +19,6 @@ public class WeatherDescriptionModel implements Parcelable {
     @SerializedName("icon")
     @Expose
     private String icon;
-    public final static Parcelable.Creator<WeatherDescriptionModel> CREATOR = new Creator<WeatherDescriptionModel>() {
-
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public WeatherDescriptionModel createFromParcel(Parcel in) {
-            WeatherDescriptionModel instance = new WeatherDescriptionModel();
-            instance.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            instance.main = ((String) in.readValue((String.class.getClassLoader())));
-            instance.description = ((String) in.readValue((String.class.getClassLoader())));
-            instance.icon = ((String) in.readValue((String.class.getClassLoader())));
-            return instance;
-        }
-
-        public WeatherDescriptionModel[] newArray(int size) {
-            return (new WeatherDescriptionModel[size]);
-        }
-
-    };
 
     public Integer getId() {
         return id;
@@ -73,17 +50,6 @@ public class WeatherDescriptionModel implements Parcelable {
 
     public void setIcon(String icon) {
         this.icon = icon;
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(main);
-        dest.writeValue(description);
-        dest.writeValue(icon);
-    }
-
-    public int describeContents() {
-        return 0;
     }
 
 }

@@ -217,8 +217,7 @@
             android:layout_below="@+id/weather_info_activity_weather_status_description"
             android:orientation="horizontal"
             android:scrollbars="horizontal" />
+
     </LinearLayout>
-
-
 
 </RelativeLayout>

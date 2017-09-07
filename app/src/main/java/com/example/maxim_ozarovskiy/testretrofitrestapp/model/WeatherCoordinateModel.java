@@ -1,12 +1,11 @@
 package com.example.maxim_ozarovskiy.testretrofitrestapp.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class WeatherCoordinateModel implements Parcelable {
+import io.realm.RealmObject;
+
+public class WeatherCoordinateModel {
 
     @SerializedName("lon")
     @Expose
@@ -14,24 +13,7 @@ public class WeatherCoordinateModel implements Parcelable {
     @SerializedName("lat")
     @Expose
     private Double lat;
-    public final static Parcelable.Creator<WeatherCoordinateModel> CREATOR = new Creator<WeatherCoordinateModel>() {
 
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public WeatherCoordinateModel createFromParcel(Parcel in) {
-            WeatherCoordinateModel instance = new WeatherCoordinateModel();
-            instance.lon = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.lat = ((Double) in.readValue((Double.class.getClassLoader())));
-            return instance;
-        }
-
-        public WeatherCoordinateModel[] newArray(int size) {
-            return (new WeatherCoordinateModel[size]);
-        }
-
-    };
 
     public Double getLon() {
         return lon;
@@ -47,15 +29,6 @@ public class WeatherCoordinateModel implements Parcelable {
 
     public void setLat(Double lat) {
         this.lat = lat;
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(lon);
-        dest.writeValue(lat);
-    }
-
-    public int describeContents() {
-        return 0;
     }
 
 }
