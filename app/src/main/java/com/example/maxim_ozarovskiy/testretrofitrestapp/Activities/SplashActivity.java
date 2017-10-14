@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
 
 /**
@@ -24,8 +25,9 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.splash_activity);
 
         splash = (ImageView) findViewById(R.id.splash);
-        Animation splashAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        splash.startAnimation(splashAnimation);
+        Glide.with(this).load(R.raw.gif_1).asGif().into(splash);
+        //Animation splashAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        //splash.startAnimation(splashAnimation);
 
         new Handler().postDelayed(new Runnable() {
             @Override

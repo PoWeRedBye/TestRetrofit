@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.Adapters.WeatherInfoActivityAdapter;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.Network.RESTClient;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.R;
+import com.example.maxim_ozarovskiy.testretrofitrestapp.View.WeatherInfoContract;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.CityModel;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherByCityModel;
 import com.example.maxim_ozarovskiy.testretrofitrestapp.model.WeatherForDayModel;
@@ -319,4 +320,6 @@ public class WeatherInfoActivity extends AppCompatActivity implements WeatherInf
     protected void onDestroy() {
         super.onDestroy();
     }
+
+
 }
