@@ -83,7 +83,6 @@ public class CityCheckListActivity extends AppCompatActivity implements CityChec
     @Override
     public void itemClick(CityModel v, int position) {
         Intent intent = new Intent(getApplicationContext(), WeatherInfoActivity.class);
-        //Intent intent = new Intent(getApplicationContext(), WeatherInfoActivityTwo.class);
         intent.putExtra("CityModel", v);
         startActivity(intent);
     }
