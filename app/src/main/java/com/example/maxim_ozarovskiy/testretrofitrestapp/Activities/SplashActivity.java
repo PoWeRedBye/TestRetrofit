@@ -25,9 +25,8 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.splash_activity);
 
         splash = (ImageView) findViewById(R.id.splash);
-        Glide.with(this).load(R.raw.gif_1).asGif().into(splash);
-        //Animation splashAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        //splash.startAnimation(splashAnimation);
+        Glide.with(this).load(R.raw.gif_splash).asGif().into(splash);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
